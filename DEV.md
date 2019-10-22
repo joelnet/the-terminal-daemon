@@ -1,19 +1,25 @@
 # Development Docs
 
+## Install
+
+```bash
+git clone https://github.com/joelnet/the-terminal-daemon.git
+cd the-terminal-daemon
+npm ci
+```
+
 ## Starting The Daemon
 
 ```bash
-cd ./server
 npm run dev
 ```
 
 ## Starting the CLI
 
-The server must be started for the CLI to connect. (see Starting the Daemon section)
+After the daemon is started you should be able to run the command:
 
 ```bash
-cd ./client
-npm run start
+npx the-terminal
 ```
 
 # Debugging
