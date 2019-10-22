@@ -13,6 +13,8 @@ Then run the command:
 npx the-terminal
 ```
 
+Create an Account to gain access to The Terminal
+
 # Create an Account
 
 The security for the `root` account has recently been comprimised by a security patch.
