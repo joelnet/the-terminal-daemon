@@ -22,6 +22,8 @@ After the daemon is started you should be able to run the command:
 npx the-terminal
 ```
 
+Follow directions in [README.md](README.md) to play
+
 # Debugging
 
 You can debug the server or client using VSCODE. Select the Debug tab, and in the dropdown you can
