@@ -1,0 +1,16 @@
+env:
+  es6: true
+  node: true
+  browser: false
+  jest: true
+parserOptions:
+  ecmaVersion: 10
+  sourceType: module
+plugins:
+  - prettier
+rules:
+  prettier/prettier: error
+  no-undef: error
+  no-unused-vars: error
+extends:
+  - 'plugin:prettier/recommended'

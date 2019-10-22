@@ -1,0 +1,173 @@
+server:
+  host: '0.0.0.0'
+  port: 18000
+root:
+  user: root
+  pass: admin123
+commands:
+  nscan:
+    scan-time: 14400 # 4 hours
+  wallet:
+    cooldown: 14400 # 4 hours
+luck:
+  nscan: 0.01 # 1%
+training:
+  luck-01:
+    time: 300 # 5 minutes
+    require: ['training:scan-02']
+    headline: Basic Probability Theory
+    body: |
+      Probability quantifies as a number between 0 and 1, where, roughly speaking,
+      0 indicates impossibility and 1 indicates certainty. The higher the probability
+      of an event, the more likely it is that the event will occur. A simple example
+      is the tossing of a fair (unbiased) coin. Since the coin is fair, the two outcomes
+      ("heads" and "tails") are both equally probable; the probability of "heads" equals
+      the probability of "tails"; and since no other outcomes are possible, the
+      probability of either "heads" or "tails" is 1/2
+      (which could also be written as 0.5 or 50%).
+
+      {bold Reward:}
+        {cyan.green +1 luck}
+  luck-02:
+    time: 3600 # 1 hour
+    require: ['training:luck-01']
+    headline: Basic Chaos theory
+    body: |
+      Chaos theory is a branch of mathematics focusing on the behavior of
+      dynamical systems that are highly sensitive to initial conditions. Chaos theory
+      is an interdisciplinary theory stating that, within the apparent randomness of
+      chaotic complex systems, there are underlying patterns, constant feedback loops,
+      repetition, self-similarity, fractals, and self-organization. The butterfly
+      effect describes how a small change in one state of a deterministic nonlinear
+      system can result in large differences in a later state, meaning there is
+      sensitive dependence on initial conditions. A metaphor for this behavior is
+      that a butterfly flapping its wings in China can cause a hurricane in Texas.
+
+      {bold Reward:}
+        {cyan.green +1 luck}
+  scan-01:
+    time: 60 # 1 minute
+    rewards: ['pkg:nscan']
+    headline: nscan
+    body: |
+      nscan ("Network Scanner") is a free and open source utility for network discovery
+      and security auditing. Many systems and network administrators also find it useful
+      for tasks such as network inventory, managing service upgrade schedules, and
+      monitoring host or service uptime. nscan uses raw IP packets in novel ways to
+      determine what hosts are available on the network, what services (application
+      name and version) those hosts are offering, what operating systems
+      (and OS versions) they are running, what type of packet filters/firewalls are
+      in use, and dozens of other characteristics.
+
+      {bold Reward:}
+        {cyan.green nscan}
+  scan-02:
+    time: 300 # 5 minutes
+    require: ['training:scan-01']
+    headline: Internet of Things Devices
+    body: |
+      IoT devices, or any of the many things in the internet of things, are
+      nonstandard computing devices that connect wirelessly to a network and
+      have the ability to transmit data.
+
+      {bold Reward:}
+        {cyan.green nscan for IoT devices}
+  scan-03:
+    time: 3600 # 1 hour
+    require: ['training:scan-02']
+    headline: Internet of Things Devices
+    body: |
+      IoT devices, or any of the many things in the internet of things, are
+      nonstandard computing devices that connect wirelessly to a network and
+      have the ability to transmit data.
+
+      {bold Reward:}
+        {cyan.green nscan for IoT devices}
+  crypto-01:
+    time: 60 # 1 minute
+    require: ['training:scan-01']
+    rewards: ['pkg:coind', 'pkg:wallet']
+    headline: Introduction to Cryptocurrency
+    body: |
+      A cryptocurrency (or crypto currency) is a digital asset designed to work
+      as a medium of exchange that uses strong cryptography to secure financial
+      transactions, control the creation of additional units, and verify the
+      transfer of assets. Cryptocurrencies use decentralized control as opposed
+      to centralized digital currency and central banking systems.
+
+      {bold Reward:}
+        {cyan.green coind package}
+        {cyan.green wallet package}
+copy:
+  welcome-text: |
+    Welcome to Terminal
+
+    All connections are monitored and recorded
+    Disconnect IMMEDIATELY if you are not an authorized user!
+
+    Your Address has been logged: {ADDRESS}
+  invalid-session: 'Error: Invalid Session, please login again.'
+mail:
+  welcome: |
+    Congratulations!
+
+    You are capable of following simple instructions. I had my doubts.
+
+    First you must prove to us you are capable, trusworty, and above all else, loyal.
+
+    Complete the task, don't ask questions, and maybe we'll be in contact again.
+
+    - Undefined
+
+    Your Task:
+      * train {cyan.bold scan-01}
+      * Install {cyan.bold nscan}
+      * Run {cyan.bold nscan} to find an exploitable machine
+
+    Tips:
+      * type {cyan.bold train} to view available trainings
+      * use the command {cyan.bold train <name>} to start training
+      * Install packages with: {cyan.bold pkg install <name>}
+  xssh: |
+    Now that you have found your first exploitable server,
+    it's time to put on your big girl panties on and do dirt.
+
+    You're not going to get anywhere unless you've got {cyan.bold coin}.
+    The more {cyan.bold coin} you got the more infamy you got.
+
+    Install the {cyan.bold coind} daemon on the server and fire it up.
+
+    View your {cyan.bold servers} file in your home directory. This will
+    show the addresses of all your servers.
+
+      {bold $ cat ~/servers}
+
+    Next install the package {cyan.bold xssh}
+
+      {bold $ pkg install xssh}
+
+    Use the {cyan.bold xssh} command to access the server.
+    Install the {cyan.bold coind} daemon on the exploited server and start it.
+
+      {bold $ xssh <address>
+      $ pkg install coind
+      $ coind start
+      $ exit}
+
+    Your Task:
+      * Train {cyan.bold crypto-01} to access the {cyan.bold coind} package
+      * Install the {cyan.bold coind} package
+      * Run {cyan.bold coind} on an exploited server
+  wallet: |
+    Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
+
+    Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
+    and view your {cyan.bold balance}.
+
+      {bold $ pkg install wallet
+      $ wallet collect
+      $ wallet balance}
+  last: |
+    TODO: fill out last steps
+coins:
+  reward: 0.1
