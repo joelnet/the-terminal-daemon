@@ -9,8 +9,7 @@ const test = req => {
 }
 
 const exec = req => {
-  const user = tables.users.find({ username: req.session.username })[0]
-  const { coins = '0' } = user
+  const { coins = '0' } = tables.state.get(username)
 
   tutorial.step4(req.session.username, coins)
 
