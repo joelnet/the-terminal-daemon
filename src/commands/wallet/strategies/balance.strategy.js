@@ -9,7 +9,7 @@ const test = req => {
 }
 
 const exec = req => {
-  const { coins = '0' } = tables.state.get(username)
+  const { coins = '0' } = tables.state.get(req.session.username)
 
   tutorial.step4(req.session.username, coins)
 
