@@ -8,7 +8,6 @@ const { tables } = require('../../../stores/fs')
 
 const reward = config.get('coins.reward')
 const cooldown = config.get('commands.wallet.cooldown')
-const coinSelector = ({ coins }) => coins || 0
 const packagesSelector = ({ packages }) => packages || []
 const statusSelector = ({ state }) => state && state.COIND && state.COIND.status
 
@@ -30,7 +29,7 @@ const calculateTotalCollected = req => {
 
 const addCoins = (amount, username) => {
   const user = tables.users.find({ username })[0]
-  const coins = coinSelector(user)
+  const { coins = 0 } = tables.state.get(username)
 
   user.coins = (Number(amount) + Number(coins)).toFixed(8)
 
