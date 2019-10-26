@@ -171,3 +171,5 @@ mail:
     TODO: fill out last steps
 coins:
   reward: 0.1
+logs:
+  level: debug
