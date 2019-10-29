@@ -4,6 +4,8 @@ const express = require('express')
 const logger = require('./logger')
 const app = express()
 
+logger.info('Starting')
+
 const host = config.get('server.host')
 const port = config.get('server.port')
 

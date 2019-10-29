@@ -7,18 +7,21 @@ const level = config.get('logs.level')
 module.exports = createLogger({
   level,
   format: format.combine(
+    format.simple(),
     format.colorize(),
     format.timestamp(),
     format.printf(info => `[${info.timestamp}] ${info.level} ${info.message}`)
   ),
   transports: [
     new transports.DailyRotateFile({
-      name: 'file',
-      datePattern: '.yyyy-MM-dd',
-      filename: `${process.cwd()}/logs/log_file.log`,
+      datePattern: 'YYYY-MM-DD',
+      filename: `${process.cwd()}/logs/%DATE%.log`,
       maxSize: '20m',
-      maxFiles: '7d'
+      maxFiles: '7d',
+      format: format.uncolorize()
     }),
-    new transports.Console({ level })
+    new transports.Console({
+      level
+    })
   ]
 })
