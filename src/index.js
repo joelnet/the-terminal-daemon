@@ -7,11 +7,10 @@ const app = express()
 const host = config.get('server.host')
 const port = config.get('server.port')
 
-process
-  .on('uncaughtException', err => {
-    logger.info(`Error: ${err}`)
-    process.exit(1)
-  });
+process.on('uncaughtException', err => {
+  logger.info(`Error: ${err}`)
+  process.exit(1)
+})
 
 const main = async () => {
   await routes({ app, path: __dirname + '/middlewares/**/*.middleware.js' })
@@ -23,6 +22,5 @@ const main = async () => {
 }
 
 main().catch(err => {
-  console.error(err)
-  return Promise.reject(err)
+  logger.error(err.stack || err)
 })
