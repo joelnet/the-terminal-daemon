@@ -5,6 +5,7 @@ const moment = require('moment')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { tables } = require('../../../stores/fs')
+const { add } = require('../../../lib/coinmath')
 
 const reward = config.get('coins.reward')
 const cooldown = config.get('commands.wallet.cooldown')
@@ -27,15 +28,6 @@ const calculateTotalCollected = req => {
   return total
 }
 
-const addCoins = (amount, username) => {
-  const user = tables.users.find({ username })[0]
-  const { coins = 0 } = tables.state.get(username)
-
-  user.coins = (Number(amount) + Number(coins)).toFixed(8)
-
-  tables.users.update(user)
-}
-
 const getHumanizedDuration = time => {
   const ms = Date.parse(time) - Date.now()
   const humanized = moment.duration(ms, 'milliseconds').humanize()
@@ -54,11 +46,11 @@ const cannotCollect = state => [
 ]
 
 const doCollect = (req, state) => {
-  state.wallet_collect_at = new Date(Date.now() + cooldown * 1000)
-  tables.state.update(state)
-
   const collectedAmount = calculateTotalCollected(req)
-  addCoins(collectedAmount, req.session.username)
+
+  state.wallet_collect_at = new Date(Date.now() + cooldown * 1000)
+  state.coins = add(state.coins, collectedAmount)
+  tables.state.update(state)
 
   return [actions.echo(chalk`Collected {cyan.bold ${collectedAmount}} coin`)]
 }
