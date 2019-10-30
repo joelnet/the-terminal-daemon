@@ -23,8 +23,8 @@ describe('filesystem/fileExists', () => {
     expect(actual).toBe(false)
   })
 
-  test('fileExists("/bin/cd") returns true', () => {
-    const actual = fileExists({ dir: '/bin/cd', username: 'test', session })
+  test('fileExists("/bin/ls") returns true', () => {
+    const actual = fileExists({ dir: '/bin/ls', username: 'test', session })
     expect(actual).toBe(true)
   })
 

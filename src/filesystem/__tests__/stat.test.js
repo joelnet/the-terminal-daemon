@@ -36,11 +36,11 @@ describe('filesystem/stat', () => {
     )
   })
 
-  test('stat("/bin/cd") returns stat', () => {
-    const actual = stat({ path: '/bin/cd', username: 'test', session })
+  test('stat("/bin/ls") returns stat', () => {
+    const actual = stat({ path: '/bin/ls', username: 'test', session })
     expect(actual).toMatchObject(
       Just({
-        name: 'cd',
+        name: 'ls',
         type: 'f'
       })
     )
