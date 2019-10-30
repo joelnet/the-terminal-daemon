@@ -11,6 +11,7 @@ const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
 const tutorial = require('../tutorial')
 const { getHumanizedDuration } = require('../lib/time')
 const { trainingSelector } = require('../stores/selectors')
+const logger = require('../logger')
 
 const name = 'nscan'
 
@@ -38,6 +39,7 @@ const exec = req => {
     (!isStarted && isLucky) || (isStarted && !isScanRunning(user))
 
   if (shouldDiscoverServer) {
+    logger.info(`\`nscan\` found new server`)
     delete user.scan_end_at
     tables.users.update(user)
 

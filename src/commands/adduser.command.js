@@ -4,6 +4,7 @@ const { tables } = require('../stores/fs')
 const { createHash } = require('../lib/password')
 const actions = require('../actions')
 const tutorial = require('../tutorial')
+const logger = require('../logger')
 
 const name = 'adduser'
 
@@ -35,6 +36,8 @@ const exec = req => {
 
     tables.users.insert({ username, hash })
     tutorial.step1(username)
+
+    logger.info(`Added user \`${username}\``)
 
     return [
       actions.echo(
