@@ -13,7 +13,17 @@ Then run the command:
 npx the-terminal
 ```
 
-Create an Account to gain access to The Terminal
+Note: Windows users with a space in their username may run into problems. Try this if you have problems:
+
+```bash
+# fix for Windows issues
+npm i -g the-terminal
+
+# Start The Terminal
+npx the-terminal
+```
+
+Follow the directions in *Create an Account* to start playing
 
 # Create an Account
 
@@ -21,14 +31,19 @@ The security for the `root` account has recently been compromised by a security 
 
 Quickly, before it re-secured, log into the `root` account using the password `admin123`.
 
+```bash
+Login as: root
+root's password: admin123
+```
+
 Once you've signed into the `root` account, you will have access to create a user.
 
 ```bash
 # Create an Account
-adduser <username>
+root$ adduser <your-username>
 ```
 
-Follow the prompts and then exit.
+Follow the prompts and then `exit`.
 
 ```bash
 # exit The Terminal
@@ -36,6 +51,12 @@ exit
 ```
 
 Log back into The Terminal using your newly created credentials.
+
+```bash
+npx the-terminal
+Login as: <your-username>
+<your-username>'s password: <your-password>
+```
 
 You will have an email waiting for you with further instructions.
 
