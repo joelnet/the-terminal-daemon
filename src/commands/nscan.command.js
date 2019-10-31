@@ -23,29 +23,29 @@ const spawnServer = (username, type = 0) => {
 const isUserLucky = ({ servers }) =>
   servers.length < 2 || Math.random() <= config.get('luck.nscan')
 
-const isScanRunning = user =>
-  user.scan_end_at && Date.parse(user.scan_end_at) - Date.now() >= 0
+const isScanRunning = ({ scan_end_at }) =>
+  scan_end_at && Date.parse(scan_end_at) - Date.now() >= 0
 
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
 const exec = req => {
   const { username } = req.session
-  const user = tables.users.find({ username: { $eq: username } })[0]
+  const { nscan_end_at } = req.state
   const servers = tables.servers.find({ owner: { $eq: username } })
 
   const isLucky = isUserLucky({ username, servers })
-  const isStarted = user.scan_end_at != null
+  const isStarted = nscan_end_at != null
   const shouldDiscoverServer =
-    (!isStarted && isLucky) || (isStarted && !isScanRunning(user))
+    (!isStarted && isLucky) || (isStarted && !isScanRunning(req.state))
 
   if (shouldDiscoverServer) {
     logger.info(`\`${username}\`: \`nscan\` found new server`)
-    delete user.scan_end_at
-    tables.users.update(user)
+    delete req.state.nscan_end_at
+    tables.state.update(req.state)
 
     const servers = [spawnServer(username, 0)]
 
-    if (trainingSelector(user).includes('scan-02')) {
+    if (trainingSelector(req.state).includes('scan-02')) {
       servers.push(spawnServer(username, 1))
     }
 
@@ -71,17 +71,17 @@ PORT    STATE        SERVICE
     return response.split('\n').map(actions.echo)
   }
 
-  if (user.scan_end_at == null) {
+  if (nscan_end_at == null) {
     const duration = config.get('commands.nscan.scan-time')
-    user.scan_end_at = new Date(Date.now() + duration * 1000)
-    tables.users.update(user)
+    req.state.nscan_end_at = new Date(Date.now() + duration * 1000)
+    tables.state.update(req.state)
   }
 
   return [
     actions.echo(`nscan is scanning.`),
     actions.echo(
       `Estimated Completion Time: ${getHumanizedDuration(
-        Date.parse(user.scan_end_at),
+        Date.parse(req.state.nscan_end_at),
         Date.now()
       )}`
     )
