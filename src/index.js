@@ -10,7 +10,7 @@ const host = config.get('server.host')
 const port = config.get('server.port')
 
 process.on('uncaughtException', err => {
-  logger.info(`Error: ${err}`)
+  logger.info(`Error: ${err.stack || err}`)
   process.exit(1)
 })
 
