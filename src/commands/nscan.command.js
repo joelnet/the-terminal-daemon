@@ -11,6 +11,7 @@ const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
 const tutorial = require('../tutorial')
 const { getHumanizedDuration } = require('../lib/time')
 const { trainingSelector } = require('../stores/selectors')
+const logger = require('../logger')
 
 const name = 'nscan'
 
@@ -38,6 +39,7 @@ const exec = req => {
     (!isStarted && isLucky) || (isStarted && !isScanRunning(user))
 
   if (shouldDiscoverServer) {
+    logger.info(`\`${username}\`: \`nscan\` found new server`)
     delete user.scan_end_at
     tables.users.update(user)
 
@@ -67,18 +69,6 @@ PORT    STATE        SERVICE
     tutorial.step2(username)
 
     return response.split('\n').map(actions.echo)
-
-    //     return [
-    //       actions.echo(
-    //         `${name}: ${
-    //           isLucky ? chalk.bgGreen.black.bold('LUCK') + ' ' : ''
-    //         }found a new server`
-    //       ),
-    //       actions.echo(chalk`scan report for ${server.address}\n
-    // PORT    STATE        SERVICE
-    // 21/tcp  {green.bold EXPLOITABLE}  ftp
-    // 21/tcp  {green.bold EXPLOITABLE}  ssh`)
-    //     ]
   }
 
   if (user.scan_end_at == null) {

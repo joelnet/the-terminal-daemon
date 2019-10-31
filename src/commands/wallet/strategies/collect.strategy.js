@@ -6,6 +6,7 @@ const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { tables } = require('../../../stores/fs')
 const { add } = require('../../../lib/coinmath')
+const logger = require('../../../logger')
 
 const reward = config.get('coins.reward')
 const cooldown = config.get('commands.wallet.cooldown')
@@ -57,6 +58,7 @@ const doCollect = (req, state) => {
 
 const exec = req => {
   const state = tables.state.get(req.session.username)
+  logger.debug(`\`wallet collect\` executed by \`${req.session.username}\``)
   return !canCollect(state) ? cannotCollect(state) : doCollect(req, state)
 }
 

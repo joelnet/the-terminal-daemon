@@ -10,6 +10,7 @@ const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
 const { fileExists } = require('../filesystem/fileExists')
 const { getHumanizedDuration } = require('../lib/time')
 const { chalkTemplate } = require('../lib/strings')
+const logger = require('../logger')
 
 const name = 'train'
 
@@ -83,6 +84,7 @@ const exec = req => {
   }
 
   if (arg != null) {
+    logger.debug(`\`train\` executed by \`${req.session.username}\``)
     const [, { time: duration }] = myTraining.find(([key]) => key === arg)
     user.training_currently = {
       lesson: arg,

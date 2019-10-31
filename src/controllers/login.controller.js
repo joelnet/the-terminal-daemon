@@ -15,6 +15,8 @@ const router = express.Router()
 const rootUser = config.get('root.user')
 const rootPass = config.get('root.pass')
 
+const logger = require('../logger')
+
 /**
  * Add uuid to req.body.id and session
  */
@@ -97,6 +99,8 @@ const loginUser = (req, res) => {
       data.env.USER = username
     }
   )
+
+  logger.info(`User \`${username}\` logged in`)
 
   return res.json([
     actions.clearHistory(),
