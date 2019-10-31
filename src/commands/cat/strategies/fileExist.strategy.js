@@ -9,7 +9,10 @@ const test = req => {
 }
 
 const exec = req => {
-  const { username, env: { PWD: pwd }} = req.session
+  const {
+    username,
+    env: { PWD: pwd }
+  } = req.session
 
   const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })

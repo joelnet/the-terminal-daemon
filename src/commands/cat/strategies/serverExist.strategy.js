@@ -1,15 +1,20 @@
+const { getArgs } = require('../../../lib/command')
 const { getDir } = require('../../../filesystem/getDir')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
 
 const test = req => {
-    const [command] = getArgs(req.body.line)
-    return command === 'serverExist'
+  const [command] = getArgs(req.body.line)
+  return command === 'serverExist'
 }
 
 const exec = req => {
-  const { username, env: { PWD: pwd }} = req.session
+  const {
+    username,
+    env: { PWD: pwd }
+  } = req.session
 
+  const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
 
   if (path === `/home/${username}/servers`) {
@@ -22,7 +27,7 @@ const exec = req => {
 }
 
 module.exports = {
-    sort: 10,
-    test,
-    exec
-  }
+  sort: 10,
+  test,
+  exec
+}
