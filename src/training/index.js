@@ -10,8 +10,8 @@ const findLessonByReward = reward =>
 const getTrained = ({ training = [] }) =>
   training.map(key => [key, allTraining[key]])
 
-const isTrained = lesson => user =>
-  getTrained(user).filter(([key]) => key === lesson).length > 0
+const isTrained = lesson => state =>
+  getTrained(state).filter(([key]) => key === lesson).length > 0
 
 module.exports = {
   findLessonByReward,

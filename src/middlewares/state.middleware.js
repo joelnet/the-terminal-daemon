@@ -2,11 +2,15 @@ const express = require('express')
 const router = express.Router()
 const { tables } = require('../stores/fs')
 
-const hasSession = req => (req.session ? true : false)
+const isLoggedIn = req => req.session && req.session.env
+
+const noSessions = ['root']
 
 router.use((req, res, next) => {
-  if (hasSession(req)) {
+  if (isLoggedIn(req) && !noSessions.includes(req.session.username)) {
     req.state = tables.state.get(req.session.username)
+  } else {
+    req.state = {}
   }
 
   return next()
