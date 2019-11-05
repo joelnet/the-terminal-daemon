@@ -1,11 +1,13 @@
 // TODO: use strategy pattern, like wallet
-const { allPass } = require('mojiscript')
+const ansi = require('ansi-escapes')
+const { allPass, range, map } = require('mojiscript')
 const { getArgs, isCommand } = require('../lib/command')
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
 const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
 
 const name = 'xssh'
+const UP = ansi.cursorPrevLine
 
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
@@ -26,9 +28,12 @@ const exec = req => {
     req.session.env.USER = 'root'
     req.session.env.PWD = '/home/root'
 
+    const delay = 150
+
     return [
       actions.historyStackPush([]),
-      actions.echo(`Connecting to: ${address}`)
+      actions.echo(`Exploiting: ${address}`, { delay }),
+      ...map(i => actions.echo(`${UP}Exploiting: ${address} ${i * 10}%`, { delay })) (range (0) (11)) // prettier-ignore
     ]
   }
 
