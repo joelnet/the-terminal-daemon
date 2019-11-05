@@ -66,6 +66,19 @@ const isScanRunning = state =>
   state.training_currently.end_at &&
   Date.parse(state.training_currently.end_at) - Date.now() >= 0
 
+const completeTraining = req => {
+  const lesson = req.state.training_currently.lesson
+
+  // TODO: Calculate User Luck and set new value
+
+  req.state.training = req.state.training || []
+  req.state.training.push(req.state.training_currently.lesson)
+  delete req.state.training_currently
+  tables.state.update(req.state)
+
+  return [actions.echo(chalk`Training of {cyan.bold ${lesson}} is complete.`)]
+}
+
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
 const exec = req => {
@@ -101,16 +114,7 @@ const exec = req => {
   }
 
   if (req.state.training_currently != null && !isScanRunning(req.state)) {
-    const lesson = req.state.training_currently.lesson
-
-    // TODO: Calculate User Luck and set new value
-
-    req.state.training = req.state.training || []
-    req.state.training.push(req.state.training_currently.lesson)
-    delete req.state.training_currently
-    tables.state.update(req.state)
-
-    return [actions.echo(chalk`Training of {cyan.bold ${lesson}} is complete.`)]
+    return completeTraining(req)
   }
 
   if (req.state.training_currently != null) {
@@ -124,6 +128,7 @@ const exec = req => {
       actions.echo(`Estimated Completion Time: ${getTime(req.state)}`)
     ]
   }
+
   return myTraining
     .map(humanizeLesson)
     .join('\n\n')
@@ -135,5 +140,7 @@ module.exports = {
   sort: 10,
   test,
   exec,
-  name
+  name,
+  isScanRunning,
+  completeTraining
 }

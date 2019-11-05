@@ -6,7 +6,7 @@ const isLoggedIn = req => req.session && req.session.env
 
 const noSessions = ['root']
 
-router.use((req, res, next) => {
+const controller = (req, res, next) => {
   if (isLoggedIn(req) && !noSessions.includes(req.session.username)) {
     req.state = tables.state.get(req.session.username)
   } else {
@@ -14,9 +14,12 @@ router.use((req, res, next) => {
   }
 
   return next()
-})
+}
+
+router.use(controller)
 
 module.exports = {
   order: 200, // run after session
-  router
+  router,
+  controller
 }

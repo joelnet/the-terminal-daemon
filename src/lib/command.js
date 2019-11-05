@@ -5,7 +5,7 @@ const { parse } = require('shell-quote')
  * @param {string} line Line to parse for command
  * @returns {string} Command taken from string
  */
-const getCommand = line => parse(line)[0]
+const getCommand = (line = '') => parse(line)[0] || ''
 
 /**
  * Parses the args from a string
