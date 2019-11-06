@@ -46,7 +46,7 @@ const setPrompt = req => {
 
   const promptTop =
     req.session.env.HOST !== 'home'
-      ? chalk`\n┌ {bgRed.black EXPLOITED: ${req.session.env.HOST}}`
+      ? chalk`\n┌ {bgRed.black  HACKED: ${req.session.env.HOST} }`
       : chalk`\n┌ ${mailPrompt}${trainingPrompt}`
 
   const promptBottom =

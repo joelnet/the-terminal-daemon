@@ -1,7 +1,9 @@
 // TODO: use strategy pattern, like wallet
 const ansi = require('ansi-escapes')
-const { allPass, range, map } = require('mojiscript')
+const { allPass } = require('mojiscript')
 const { getArgs, isCommand } = require('../lib/command')
+const { animateProgressBar } = require('../lib/progressbar')
+
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
 const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
@@ -32,8 +34,15 @@ const exec = req => {
 
     return [
       actions.historyStackPush([]),
-      actions.echo(`Exploiting: ${address}`, { delay }),
-      ...map(i => actions.echo(`${UP}Exploiting: ${address} ${i * 10}%`, { delay })) (range (0) (11)) // prettier-ignore
+      actions.echo(''),
+      ...animateProgressBar({
+        text: `${UP}Exploiting: ${address} `,
+        steps: 10,
+        size: 25,
+        options: { delay }
+      }).map(bar =>
+        actions.echo(`${UP}Exploiting: ${address} ${bar}`, { delay })
+      )
     ]
   }
 
