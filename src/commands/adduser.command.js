@@ -11,7 +11,7 @@ const name = 'adduser'
 const test = isCommand(name)
 
 const exec = req => {
-  const [username] = getArgs(req.body.line)
+  const [username] = getArgs(req.body.line).map(arg => arg.toLowerCase())
 
   if (req.session.username !== 'root') {
     return [
@@ -21,6 +21,14 @@ const exec = req => {
 
   if (username == null) {
     return [actions.echo(`${name}: must include a username.`)]
+  }
+
+  if (!/^[a-z]{4,16}$/.test(username)) {
+    return [
+      actions.echo(
+        `${name}: must contain only lowercase letters (4-16 characters)`
+      )
+    ]
   }
 
   if (tables.users.find({ username: { $eq: username } })[0]) {
