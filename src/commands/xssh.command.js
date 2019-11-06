@@ -34,7 +34,7 @@ const exec = req => {
 
     return [
       actions.historyStackPush([]),
-      actions.echo(''),
+      actions.echo(' '),
       ...animateProgressBar({
         text: `${UP}Exploiting: ${address} `,
         steps: 10,
