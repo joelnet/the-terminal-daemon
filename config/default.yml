@@ -105,7 +105,7 @@ copy:
     Welcome to Terminal
 
     All connections are monitored and recorded
-    Disconnect IMMEDIATELY if you are not an authorized user!
+    Disconnect IMMEDIATELY if you are not authorized!
 
     Your Address has been logged: {ADDRESS}
   invalid-session: 'Error: Invalid Session, please login again.'
