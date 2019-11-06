@@ -50,7 +50,9 @@ const setPrompt = req => {
       : chalk`\n┌ ${mailPrompt}${trainingPrompt}`
 
   const promptBottom =
-    displayName === 'root' ? basicPrompt : chalk`└ ${basicPrompt}`
+    displayName === 'root' && req.session.env.HOST === 'home'
+      ? basicPrompt
+      : chalk`└ ${basicPrompt}`
 
   return displayName === 'root' && req.session.env.HOST === 'home'
     ? [actions.setPrompt(promptBottom)]
