@@ -2,7 +2,7 @@ const { map, range } = require('mojiscript')
 
 const progressBar = ({ size, percent = 0 } = {}) => {
   const progress = Math.round(size * percent)
-  return `[${'='.repeat(progress)}${'-'.repeat(size - progress)}] ${Math.round(
+  return `[${'#'.repeat(progress)}${'.'.repeat(size - progress)}] ${Math.round(
     percent * 100
   )}%`
 }
