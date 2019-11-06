@@ -17,7 +17,9 @@ const getTrainingPrompt = req => {
     req.state &&
     req.state.training_currently &&
     new Date(req.state.training_currently.end_at) > new Date()
-  const lesson = isTraining ? req.state.training_currently.lesson : '--'
+  const lesson = isTraining
+    ? req.state.training_currently.lesson
+    : 'not training'
   const duration = isTraining
     ? `(${getHumanizedDuration(
         new Date(req.state.training_currently.end_at),
