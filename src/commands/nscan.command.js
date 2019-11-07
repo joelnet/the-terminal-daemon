@@ -23,8 +23,8 @@ const spawnServer = (username, type = 0) => {
 const isUserLucky = ({ servers }) =>
   servers.length < 2 || Math.random() <= config.get('luck.nscan')
 
-const isScanRunning = ({ scan_end_at }) =>
-  scan_end_at && Date.parse(scan_end_at) - Date.now() >= 0
+const isScanRunning = ({ nscan_end_at }) =>
+  nscan_end_at && Date.parse(nscan_end_at) - Date.now() >= 0
 
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
