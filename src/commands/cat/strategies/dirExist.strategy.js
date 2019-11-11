@@ -4,7 +4,7 @@ const { getDir } = require('../../../filesystem/getDir')
 const { getArgs } = require('../../../lib/command')
 
 const exec = req => {
-    const {
+  const {
     username,
     env: { PWD: pwd }
   } = req.session
@@ -21,6 +21,7 @@ const test = req => {
     username,
     env: { PWD: pwd }
   } = req.session
+  const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
   dirExists({ dir: path, username, session: req.session })
 }

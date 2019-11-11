@@ -1,4 +1,4 @@
-const { allPass } = require('mojiscript')
+//const { allPass } = require('mojiscript')
 const path = require('path')
 const { isCommand } = require('../../lib/command')
 const { execStrategy, getStrategies } = require('../../lib/strategies')
