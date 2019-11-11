@@ -1,15 +1,10 @@
+const actions = require('../../../actions')
 const { dirExists } = require('../../../filesystem')
 const { getDir } = require('../../../filesystem/getDir')
 const { getArgs } = require('../../../lib/command')
-const actions = require('../../../actions')
-
-const test = req => {
-  const [command] = getArgs(req.body.line)
-  return command === 'dirExist'
-}
 
 const exec = req => {
-  const {
+    const {
     username,
     env: { PWD: pwd }
   } = req.session
@@ -19,6 +14,15 @@ const exec = req => {
   if (dirExists({ dir: path, username, session: req.session })) {
     return [actions.echo(`cat: ${arg}: Is directory`)]
   }
+}
+
+const test = req => {
+  const {
+    username,
+    env: { PWD: pwd }
+  } = req.session
+  const path = getDir({ username, pwd, dir: arg })
+  dirExists({ dir: path, username, session: req.session })
 }
 
 module.exports = {

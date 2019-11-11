@@ -3,11 +3,6 @@ const { getDir } = require('../../../filesystem/getDir')
 const { getArgs } = require('../../../lib/command')
 const actions = require('../../../actions')
 
-const test = req => {
-  const [command] = getArgs(req.body.line)
-  return command === 'fileExist'
-}
-
 const exec = req => {
   const {
     username,
@@ -20,6 +15,11 @@ const exec = req => {
   if (!fileExists({ dir: path, username, session: req.session })) {
     return [actions.echo(`cat: ${arg}: No such file or directory`)]
   }
+}
+
+const test = req => {
+  const [command] = getArgs(req.body.line)
+  return command === 'fileExist'
 }
 
 module.exports = {
