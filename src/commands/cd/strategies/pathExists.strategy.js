@@ -4,13 +4,9 @@ const { getDir } = require('../../../filesystem/getDir')
 const { dirExists } = require('../../../filesystem')
 
 const test = req => {
-  const {
-    username,
-    env: { PWD: pwd }
-  } = req.session
+  const { username } = req.session
 
-  const [dir = `~`] = getArgs(req.body.line)
-  const fullPath = getDir({ username, pwd, dir }).replace(/\\/g, '/')
+  const fullPath = getFullPath(req)
 
   return dirExists({
     dir: fullPath,
@@ -20,12 +16,7 @@ const test = req => {
 }
 
 const exec = req => {
-  const {
-    username,
-    env: { PWD: pwd }
-  } = req.session
-  const [dir = `~`] = getArgs(req.body.line)
-  const fullPath = getDir({ username, pwd, dir }).replace(/\\/g, '/')
+  const fullPath = getFullPath(req)
 
   sessions.updateWhere(
     session => session.id === req.body.id,
@@ -34,6 +25,16 @@ const exec = req => {
     }
   )
   return []
+}
+
+const getFullPath = req => {
+  const {
+    username,
+    env: { PWD: pwd }
+  } = req.session
+  const [dir = `~`] = getArgs(req.body.line)
+
+  return getDir({ username, pwd, dir })
 }
 
 module.exports = {
