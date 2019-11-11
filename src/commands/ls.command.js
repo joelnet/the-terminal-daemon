@@ -12,7 +12,7 @@ const exec = req => {
   } = req.session
 
   const arg = getArgs(req.body.line)[0]
-  const dir = getDir({ username, pwd: PWD, dir: arg })
+  const dir = getDir({ username, pwd: PWD, dir: arg }).replace(/\\/g, '/')
 
   return ls({ path: dir, username, session: req.session }).getValue(
     () => [actions.echo(`ls: ${dir}: No such file or directory`)],
