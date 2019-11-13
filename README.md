@@ -2,6 +2,12 @@
 
 The Terminal is a hacker game played in the terminal.
 
+# Help / Feedback
+
+Need Help? Want to give Feedback?
+
+[Join the Discord chat!](https://discordapp.com/invite/Gg7ptD5)
+
 # Accessing The Terminal
 
 To access The Terminal, you will need to have `node.js` and an up to date version of `npm`, which includes the `npx` command.
