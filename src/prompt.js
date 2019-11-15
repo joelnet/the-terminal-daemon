@@ -30,6 +30,21 @@ const getTrainingPrompt = req => {
   return chalk.bgYellow.black(` training: ${lesson} ${duration} `)
 }
 
+const getNscanPrompt = req => {
+  const isScanning =
+    req.state &&
+    req.state.nscan_end_at &&
+    new Date(req.state.nscan_end_at) > new Date()
+  const duration = isScanning
+    ? ` nscan: (${getHumanizedDuration(
+        new Date(req.state.nscan_end_at),
+        new Date()
+      )}) `
+    : ''
+
+  return chalk.bgCyan.black(duration)
+}
+
 const getPwd = req =>
   req.session.env.PWD === `/home/${req.session.env.USER}`
     ? '~'
@@ -40,6 +55,7 @@ const setPrompt = req => {
 
   const mailPrompt = getMailPrompt(req)
   const trainingPrompt = getTrainingPrompt(req)
+  const nscanPrompt = getNscanPrompt(req)
   const pwd = chalk.red(getPwd(req))
 
   // TODO: this logic is confusing. clean it up.
@@ -49,7 +65,7 @@ const setPrompt = req => {
   const promptTop =
     req.session.env.HOST !== 'home'
       ? chalk`\n┌ {bgRed.black  HACKED: ${req.session.env.HOST} }`
-      : chalk`\n┌ ${mailPrompt}${trainingPrompt}`
+      : chalk`\n┌ ${mailPrompt}${trainingPrompt}${nscanPrompt}`
 
   const promptBottom =
     displayName === 'root' && req.session.env.HOST === 'home'
