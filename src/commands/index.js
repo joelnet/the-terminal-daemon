@@ -2,7 +2,7 @@ const path = require('path')
 const { setPrompt } = require('../prompt')
 const { getStrategies, execStrategy } = require('../lib/strategies')
 const { isScanRunning, completeTraining } = require('./train.command')
-const nscan = require('./nscan/strategies/discover-server.strategy')
+const nscan = require('./nscan/discover-server')
 
 const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
 
@@ -15,7 +15,8 @@ const exec = async (req, res) => {
       ? completeTraining(req)
       : []
 
-  const nscanCommands = nscan.test(req) ? nscan.exec(req) : []
+  const nscanCommands =
+    req.state.nscan_end_at && nscan.test(req) ? nscan.exec(req) : []
 
   const commands = []
     .concat(trainingCommands)

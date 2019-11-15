@@ -68,6 +68,7 @@ const isScanRunning = state =>
 
 const completeTraining = req => {
   const lesson = req.state.training_currently.lesson
+  const rewards = config.get('training')[lesson].rewards || []
 
   // TODO: Calculate User Luck and set new value
 
@@ -76,7 +77,18 @@ const completeTraining = req => {
   delete req.state.training_currently
   tables.state.update(req.state)
 
-  return [actions.echo(chalk`Training of {cyan.bold ${lesson}} is complete.`)]
+  return [
+    actions.echo(
+      chalk`{bgCyan.black  training: } Training of {cyan.bold ${lesson}} is complete.`
+    ),
+    ...rewards.map(reward => {
+      if (reward.startsWith('pkg:')) {
+        const pkg = reward.substr(4)
+        return actions.echo(chalk`package {cyan.bold ${pkg}} is available.
+type {cyan.bold pkg install ${pkg}} to install.`)
+      }
+    })
+  ]
 }
 
 const test = allPass([isCommand(name), doesServerHavePackage(name)])

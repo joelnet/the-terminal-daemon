@@ -16,7 +16,7 @@ const step2 = username => {
     template: { $eq: 'welcome' }
   })
 
-  tables.mail.insert({ username, template: 'xssh' })
+  tables.mail.insert({ username, template: 'trained' })
 }
 
 /**
@@ -25,12 +25,15 @@ const step2 = username => {
 const step3 = username => {
   const mail = tables.mail.find({
     username: { $eq: username },
-    template: { $eq: 'xssh' }
+    template: { $eq: 'trained' }
   })[0]
 
   if (mail) {
-    tables.mail.remove(mail)
-    tables.mail.insert({ username, template: 'wallet' })
+    tables.mail.findAndRemove({
+      username: { $eq: username },
+      template: { $eq: 'trained' }
+    })
+    tables.mail.insert({ username, template: 'xssh' })
   }
 }
 
@@ -45,7 +48,7 @@ const step4 = (username, coins) => {
 
   const mail = tables.mail.find({
     username: { $eq: username },
-    template: { $eq: 'wallet' }
+    template: { $eq: 'xssh' }
   })[0]
 
   if (mail) {

@@ -1,10 +1,9 @@
 const chalk = require('chalk')
-const config = require('config')
 const randomIpv6 = require('random-ipv6')
-const { tables } = require('../../../stores/fs')
-const actions = require('../../../actions')
-const tutorial = require('../../../tutorial')
-const logger = require('../../../logger')
+const { tables } = require('../../stores/fs')
+const actions = require('../../actions')
+const tutorial = require('../../tutorial')
+const logger = require('../../logger')
 
 const spawnServer = (username, type = 0) => {
   const address = randomIpv6()
@@ -14,18 +13,12 @@ const spawnServer = (username, type = 0) => {
 const isScanRunning = nscan_end_at =>
   nscan_end_at && Date.parse(nscan_end_at) - Date.now() >= 0
 
-const isUserLucky = servers =>
-  servers.length < 2 || Math.random() <= config.get('luck.nscan')
-
 const test = req => {
-  const { username } = req.session
   const { nscan_end_at } = req.state
-  const servers = tables.servers.find({ owner: { $eq: username } })
 
-  const isLucky = isUserLucky(servers)
   const isStarted = nscan_end_at != null
   const shouldDiscoverServer =
-    (!isStarted && isLucky) || (isStarted && !isScanRunning(nscan_end_at))
+    !isStarted || (isStarted && !isScanRunning(nscan_end_at))
 
   return shouldDiscoverServer
 }
@@ -54,9 +47,9 @@ scan report for {cyan.bold ${server.address}}\n
 PORT    STATE        SERVICE
 21/tcp  SECURE       ftp
 22/tcp  SECURE       ssh
-80/tcp  {green.bold EXPLOITABLE}  http`.join('\n\n')
+80/tcp  {green.bold EXPLOITABLE}  http`
 
-  tutorial.step2(username)
+  tutorial.step3(username)
 
   return response.split('\n').map(actions.echo)
 }

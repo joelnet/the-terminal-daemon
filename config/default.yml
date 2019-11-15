@@ -110,32 +110,38 @@ copy:
     Your Address has been logged: {ADDRESS}
   invalid-session: 'Error: Invalid Session, please login again.'
 mail:
-  welcome: |
-    Congratulations!
+  welcome:
+    text: |
+      Congratulations!
 
-    You are capable of following simple instructions. I had my doubts.
+      You can follow simple instructions. I had my doubts.
 
-    First you must prove to us you are capable, trusworty, and above all else, loyal.
+      You must prove to us you are capable, trustworty, and above all else, loyal.
 
-    Complete the task, don't ask questions, and maybe we'll be in contact again.
+      But right now you don't know shit.
 
-    - Undefined
+      So learn a few things and maybe we'll be in contact again.
 
-    Your Task:
-      * train {cyan.bold scan-01}
-      * Install {cyan.bold nscan}
-      * Run {cyan.bold nscan} to find an exploitable machine
+      - X
+    tasks:
+      - { train: scan-01 }
+  trained:
+    text: |
+      You are a quick learner. But learning and doing are two separate things.
 
-    Tips:
-      * type {cyan.bold train} to view available trainings
-      * use the command {cyan.bold train <name>} to start training
-      * Install packages with: {cyan.bold pkg install <name>}
+      Use {cyan.bold nscan} to find vulnerable computers with known exploits.
+
+      Start scanning, see what you can find.
+
+      - X
+    tasks:
+      - { run: nscan }
   xssh: |
     Now that you have found your first exploitable server,
     it's time to put on your big girl panties on and do dirt.
 
     You're not going to get anywhere unless you've got {cyan.bold coin}.
-    The more {cyan.bold coin} you got the more infamy you got.
+    The more {cyan.bold coin} you got the more power you've got.
 
     Install the {cyan.bold coind} daemon on the server and fire it up.
 

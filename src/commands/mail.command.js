@@ -24,12 +24,32 @@ const exec = req => {
   mails.forEach(mail => setRead(mail))
 
   return mails.reduce((acc, mail) => {
-    const template = chalkTemplate(config.mail[mail.template])
+    // TODO: this code is shit. un-shit it.
+    const options = config.mail[mail.template]
+    const { tasks = [], text = options } = options
+    let template = chalkTemplate(text)
 
-    ;`[${mail.$loki}] >>>>>>>>> \n${template}`
-      .split('\n')
-      .forEach(line => acc.push(actions.echo(line || ' ')))
-    return acc
+    if (tasks.length) {
+      template += chalk`\n{bgGreen.black  Hints: }`
+      template += tasks.map(task => {
+        if (task.train != null) {
+          return chalk`
+  - type {cyan.bold train} to access the training system
+  - type {cyan.bold train ${task.train}} to train`
+        }
+        if (task.run != null) {
+          return chalk`
+  - type {cyan.bold ${task.run}} to run the package`
+        }
+      })
+    }
+
+    return [
+      ...acc,
+      ...chalk`\n{cyan  >>>>> [ message ${mail.$loki} ] >>>>> }\n${template}`
+        .split('\n')
+        .map(line => actions.echo(line || ' '))
+    ]
   }, [])
 }
 

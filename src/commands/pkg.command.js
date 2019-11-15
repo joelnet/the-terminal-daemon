@@ -8,6 +8,7 @@ const nscan = require('../commands/nscan/nscan.command')
 const wallet = require('../commands/wallet/wallet.command')
 const xssh = require('../commands/xssh.command')
 const { isTrained, findLessonByReward } = require('../training')
+const tutorial = require('../tutorial')
 
 const name = 'pkg'
 
@@ -81,6 +82,10 @@ E: Unable to locate package ${pkg}`
           chalk`{cyan.bold ${pkg}} Cannot be installed\nRequired skill {cyan.bold ${lessonName}} is missing.`
         )
       ]
+    }
+
+    if (pkg === 'nscan') {
+      tutorial.step2(req.session.username)
     }
 
     server.packages.push(pkg)
