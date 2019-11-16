@@ -179,3 +179,6 @@ mail:
     TODO: fill out last steps
 coins:
   reward: 0.1
+serverTypes:
+  0: 'regular'
+  1: 'iot'

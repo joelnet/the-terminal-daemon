@@ -1,4 +1,5 @@
 // TODO: use strategy pattern, like wallet
+const config = require('config')
 const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { getDir } = require('../filesystem/getDir')
@@ -7,6 +8,8 @@ const { dirExists } = require('../filesystem')
 const { fileExists } = require('../filesystem')
 
 const test = isCommand('cat')
+
+const allServerTypes = config.get('serverTypes')
 
 const exec = req => {
   const {
@@ -30,7 +33,11 @@ const exec = req => {
       owner: { $eq: username },
       address: { $ne: 'home' }
     })
-    return [actions.echo(servers.map(server => server.address).join('\n'))]
+    return [actions.echo(servers
+      .sort((serverA, serverB) => serverA.type - serverB.type)
+      .map(server => `${server.address} ${allServerTypes[server.type]}`)
+      .join('\n')
+    )]
   }
 
   return [actions.echo(`cat: ${arg}: File cannot be output`)]
