@@ -136,47 +136,48 @@ mail:
       - X
     tasks:
       - { run: nscan }
-  xssh: |
-    Now that you have found your first exploitable server,
-    it's time to put on your big girl panties on and do dirt.
+  exploitable:
+    text: |
+      Hey, You found your first exploitable server. Congrats!
 
-    You're not going to get anywhere unless you've got {cyan.bold coin}.
-    The more {cyan.bold coin} you got the more power you've got.
+      No, seriously... Be proud, most people don't make it this far!
 
-    Install the {cyan.bold coind} daemon on the server and fire it up.
+      At any time you can view all the servers under your control
+      by running the command:
 
-    View your {cyan.bold servers} file in your home directory. This will
-    show the addresses of all your servers.
+        $ {bold.cyan cat ~/servers}
 
-      {bold $ cat ~/servers}
+      It's time to get paid. So start learning about crypto-currencies.
 
-    Next install the package {cyan.bold xssh}
+    tasks:
+      - { train: crypto-01 }
+  xssh:
+    text: |
+      Hacking servers and getting paid. This is our bread and butter.
 
-      {bold $ pkg install xssh}
+      Hack one of your servers.
 
-    Use the {cyan.bold xssh} command to access the server.
-    Install the {cyan.bold coind} daemon on the exploited server and start it.
+        $ {cyan.bold cat ~/servers}
+        $ {cyan.bold xssh <server>}
 
-      {bold $ xssh <address>
-      $ pkg install coind
-      $ coind start
-      $ exit}
+      Install the {cyan.bold coind} daemon and start it and get out.
 
-    Your Task:
-      * Train {cyan.bold crypto-01} to access the {cyan.bold coind} package
-      * Install the {cyan.bold coind} package
-      * Run {cyan.bold coind} on an exploited server
-  wallet: |
-    Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
+        $ {cyan.bold pkg install coind}
+        $ {cyan.bold coind start}
+        $ {cyan.bold exit}
+  wallet:
+    text: |
+      Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
 
-    Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
-    and view your {cyan.bold balance}.
+      Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
+      and view your {cyan.bold balance}.
 
-      {bold $ pkg install wallet
-      $ wallet collect
-      $ wallet balance}
-  last: |
-    TODO: fill out last steps
+        $ {cyan.bold pkg install wallet}
+        $ {cyan.bold wallet collect}
+        $ {cyan.bold wallet balance}
+  last:
+    text: |
+      TODO: fill out last steps
 coins:
   reward: 0.1
 serverTypes:

@@ -7,7 +7,10 @@ const tutorial = require('../../tutorial')
 const logger = require('../../logger')
 
 const unformattedServerTypes = config.get('serverTypes')
-const allServerTypes = Object.keys(unformattedServerTypes).map(key => [key, unformattedServerTypes[key]])
+const allServerTypes = Object.keys(unformattedServerTypes).map(key => [
+  key,
+  unformattedServerTypes[key]
+])
 
 const spawnServer = (username, type = 0) => {
   const address = randomIpv6()

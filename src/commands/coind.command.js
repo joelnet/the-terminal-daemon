@@ -36,7 +36,7 @@ const exec = req => {
       tables.servers.update(server)
 
       if (server.address !== 'home') {
-        tutorial.step4(username)
+        tutorial.step5(username)
       }
 
       return [actions.echo(`${name}: Started`)]

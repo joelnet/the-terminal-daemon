@@ -33,11 +33,14 @@ const exec = req => {
       owner: { $eq: username },
       address: { $ne: 'home' }
     })
-    return [actions.echo(servers
-      .sort((serverA, serverB) => serverA.type - serverB.type)
-      .map(server => `${server.address} ${allServerTypes[server.type]}`)
-      .join('\n')
-    )]
+    return [
+      actions.echo(
+        servers
+          .sort((serverA, serverB) => serverA.type - serverB.type)
+          .map(server => `${server.address} ${allServerTypes[server.type]}`)
+          .join('\n')
+      )
+    ]
   }
 
   return [actions.echo(`cat: ${arg}: File cannot be output`)]
