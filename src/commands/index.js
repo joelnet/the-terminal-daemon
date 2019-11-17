@@ -8,7 +8,6 @@ const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
 
 const exec = async (req, res) => {
   const response = await execStrategy(strategies)(req, res)
-  const withPrompt = response.concat(setPrompt(req, res))
 
   const trainingCommands =
     req.state.training_currently != null && !isScanRunning(req.state)
@@ -17,6 +16,8 @@ const exec = async (req, res) => {
 
   const nscanCommands =
     req.state.nscan_end_at && nscan.test(req) ? nscan.exec(req) : []
+
+  const withPrompt = response.concat(setPrompt(req, res))
 
   const commands = []
     .concat(trainingCommands)

@@ -11,7 +11,7 @@ const test = req => {
 const exec = req => {
   const { coins = '0' } = tables.state.get(req.session.username)
 
-  tutorial.step4(req.session.username, coins)
+  tutorial.step6(req.session.username, coins)
 
   return [actions.echo(`Balance: ${Number(coins).toFixed(8)}`)]
 }

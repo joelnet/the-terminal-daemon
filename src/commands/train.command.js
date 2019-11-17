@@ -11,6 +11,7 @@ const { fileExists } = require('../filesystem/fileExists')
 const { getHumanizedDuration } = require('../lib/time')
 const { chalkTemplate } = require('../lib/strings')
 const logger = require('../logger')
+const tutorial = require('../tutorial')
 
 const name = 'train'
 
@@ -76,6 +77,8 @@ const completeTraining = req => {
   req.state.training.push(req.state.training_currently.lesson)
   delete req.state.training_currently
   tables.state.update(req.state)
+
+  tutorial.step4(req.session.username, lesson)
 
   return [
     actions.echo(
