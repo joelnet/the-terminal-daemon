@@ -9,7 +9,8 @@
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "jest",
     "test:coverage": "npm run test -- --coverage",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@paciolan/express-easy-routes": "^1.0.13",
