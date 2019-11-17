@@ -1,9 +1,16 @@
+const config = require('config')
 const chalk = require('chalk')
 const randomIpv6 = require('random-ipv6')
 const { tables } = require('../../stores/fs')
 const actions = require('../../actions')
 const tutorial = require('../../tutorial')
 const logger = require('../../logger')
+
+const unformattedServerTypes = config.get('serverTypes')
+const allServerTypes = Object.keys(unformattedServerTypes).map(key => [
+  key,
+  unformattedServerTypes[key]
+])
 
 const spawnServer = (username, type = 0) => {
   const address = randomIpv6()
@@ -27,7 +34,9 @@ const exec = req => {
   const { username } = req.session
   const { nscan_arg: arg } = req.state
 
-  const server = spawnServer(username, arg === 'iot' ? 1 : 0)
+  const serverType = allServerTypes.find(serverType => serverType[1] === arg)
+
+  const server = spawnServer(username, serverType ? serverType[0] : 0)
 
   logger.info(`\`${username}\`: \`nscan\` found new server`)
 
@@ -37,12 +46,12 @@ const exec = req => {
 
   const response =
     server.type === 1
-      ? chalk` 
+      ? chalk`
 scan report for {cyan.bold ${server.address}}\n
 PORT    STATE        SERVICE
 22/tcp  {green.bold EXPLOITABLE}  ssh
 80/tcp  SECURE       http`
-      : chalk` 
+      : chalk`
 scan report for {cyan.bold ${server.address}}\n
 PORT    STATE        SERVICE
 21/tcp  SECURE       ftp
