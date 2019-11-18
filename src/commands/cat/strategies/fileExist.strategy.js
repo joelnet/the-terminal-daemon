@@ -1,9 +1,9 @@
-const { fileExists } = require('../../../filesystem')
 const { getDir } = require('../../../filesystem/getDir')
 const { getArgs } = require('../../../lib/command')
 const actions = require('../../../actions')
+const { tables } = require('../../../stores/fs')
 
-const exec = req => {
+const test = req => {
   const {
     username,
     env: { PWD: pwd }
@@ -12,14 +12,18 @@ const exec = req => {
   const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
 
-  if (!fileExists({ dir: path, username, session: req.session })) {
-    return [actions.echo(`cat: ${arg}: No such file or directory`)]
-  }
+  return path === `/home/${username}/servers`
 }
 
-const test = req => {
-  const [command] = getArgs(req.body.line)
-  return command === 'fileExist'
+const exec = req => {
+  const { username } = req.session
+
+  const servers = tables.servers.find({
+    owner: { $eq: username },
+    address: { $ne: 'home' }
+  })
+
+  return [actions.echo(servers.map(server => server.address).join('\n'))]
 }
 
 module.exports = {
