@@ -1,4 +1,5 @@
 // TODO: use strategy pattern, like wallet
+const chalk = require('chalk')
 const config = require('config')
 const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
@@ -37,8 +38,8 @@ const exec = req => {
       actions.echo(
         servers
           .sort((serverA, serverB) => serverA.type - serverB.type)
-          .map(server => `${server.address} ${allServerTypes[server.type]}`)
-          .join('\n')
+          .map(server => chalk`${server.address} {cyan  ${allServerTypes[server.type]} }`)
+          .join('\n') // prettier-ignore
       )
     ]
   }

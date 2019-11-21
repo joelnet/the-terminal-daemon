@@ -181,5 +181,5 @@ mail:
 coins:
   reward: 0.1
 serverTypes:
-  0: 'Unknown'
-  1: 'IoT'
+  0: 'unknown'
+  1: 'iot'
