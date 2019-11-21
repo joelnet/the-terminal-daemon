@@ -105,71 +105,81 @@ copy:
     Welcome to Terminal
 
     All connections are monitored and recorded
-    Disconnect IMMEDIATELY if you are not an authorized user!
+    Disconnect IMMEDIATELY if you are not authorized!
 
     Your Address has been logged: {ADDRESS}
   invalid-session: 'Error: Invalid Session, please login again.'
 mail:
-  welcome: |
-    Congratulations!
+  welcome:
+    text: |
+      Congratulations!
 
-    You are capable of following simple instructions. I had my doubts.
+      You can follow simple instructions. I had my doubts.
 
-    First you must prove to us you are capable, trusworty, and above all else, loyal.
+      You must prove to us you are capable, trustworty, and above all else, loyal.
 
-    Complete the task, don't ask questions, and maybe we'll be in contact again.
+      But right now you don't know shit.
 
-    - Undefined
+      So learn a few things and maybe we'll be in contact again.
 
-    Your Task:
-      * train {cyan.bold scan-01}
-      * Install {cyan.bold nscan}
-      * Run {cyan.bold nscan} to find an exploitable machine
+      - X
+    tasks:
+      - { train: scan-01 }
+  trained:
+    text: |
+      You are a quick learner. But learning and doing are two separate things.
 
-    Tips:
-      * type {cyan.bold train} to view available trainings
-      * use the command {cyan.bold train <name>} to start training
-      * Install packages with: {cyan.bold pkg install <name>}
-  xssh: |
-    Now that you have found your first exploitable server,
-    it's time to put on your big girl panties on and do dirt.
+      Use {cyan.bold nscan} to find vulnerable computers with known exploits.
 
-    You're not going to get anywhere unless you've got {cyan.bold coin}.
-    The more {cyan.bold coin} you got the more infamy you got.
+      Start scanning, see what you can find.
 
-    Install the {cyan.bold coind} daemon on the server and fire it up.
+      - X
+    tasks:
+      - { run: nscan }
+  exploitable:
+    text: |
+      Hey, You found your first exploitable server. Congrats!
 
-    View your {cyan.bold servers} file in your home directory. This will
-    show the addresses of all your servers.
+      No, seriously... Be proud, most people don't make it this far!
 
-      {bold $ cat ~/servers}
+      At any time you can view all the servers under your control
+      by running the command:
 
-    Next install the package {cyan.bold xssh}
+        $ {bold.cyan cat ~/servers}
 
-      {bold $ pkg install xssh}
+      It's time to get paid. So start learning about crypto-currencies.
 
-    Use the {cyan.bold xssh} command to access the server.
-    Install the {cyan.bold coind} daemon on the exploited server and start it.
+    tasks:
+      - { train: crypto-01 }
+  xssh:
+    text: |
+      Hacking servers and getting paid. This is our bread and butter.
 
-      {bold $ xssh <address>
-      $ pkg install coind
-      $ coind start
-      $ exit}
+      Hack one of your servers.
 
-    Your Task:
-      * Train {cyan.bold crypto-01} to access the {cyan.bold coind} package
-      * Install the {cyan.bold coind} package
-      * Run {cyan.bold coind} on an exploited server
-  wallet: |
-    Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
+        $ {cyan.bold cat ~/servers}
+        $ {cyan.bold xssh <server>}
 
-    Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
-    and view your {cyan.bold balance}.
+      Install the {cyan.bold coind} daemon and start it and get out.
 
-      {bold $ pkg install wallet
-      $ wallet collect
-      $ wallet balance}
-  last: |
-    TODO: fill out last steps
+        $ {cyan.bold pkg install coind}
+        $ {cyan.bold coind start}
+        $ {cyan.bold exit}
+  wallet:
+    text: |
+      Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
+
+      Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
+      and view your {cyan.bold balance}.
+
+        $ {cyan.bold pkg install wallet}
+        $ {cyan.bold wallet collect}
+        $ {cyan.bold wallet balance}
+  last:
+    text: |
+      TODO: fill out last steps
 coins:
   reward: 0.1
+serverTypes:
+  0: 'unknown'
+  1: 'iot'

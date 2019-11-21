@@ -4,10 +4,11 @@ const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
 const coind = require('../commands/coind.command')
-const nscan = require('../commands/nscan.command')
+const nscan = require('../commands/nscan/nscan.command')
 const wallet = require('../commands/wallet/wallet.command')
 const xssh = require('../commands/xssh.command')
 const { isTrained, findLessonByReward } = require('../training')
+const tutorial = require('../tutorial')
 
 const name = 'pkg'
 
@@ -36,7 +37,6 @@ const test = isCommand(name)
 const exec = req => {
   const [action, pkg] = getArgs(req.body.line)
   const { username, env } = req.session
-  const user = tables.users.find({ username: { $eq: username } })[0]
 
   if (req.session.username === 'root') {
     return [actions.echo(chalk.red(`E: ${name}: root is restricted`))]
@@ -76,12 +76,16 @@ E: Unable to locate package ${pkg}`
 
     const [lessonName, lesson] = findLessonByReward(`pkg:${pkg}`) || []
 
-    if (lesson && !isTrained(lessonName)(user)) {
+    if (lesson && !isTrained(lessonName)(req.state)) {
       return [
         actions.echo(
           chalk`{cyan.bold ${pkg}} Cannot be installed\nRequired skill {cyan.bold ${lessonName}} is missing.`
         )
       ]
+    }
+
+    if (pkg === 'nscan') {
+      tutorial.step2(req.session.username)
     }
 
     server.packages.push(pkg)

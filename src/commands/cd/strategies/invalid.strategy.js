@@ -1,7 +1,7 @@
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 
-const name = 'wallet'
+const name = 'cd'
 
 const test = () => true
 

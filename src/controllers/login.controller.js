@@ -6,14 +6,19 @@ const uuidv4 = require('uuid/v4')
 const { sessions } = require('../stores/memory')
 const { tables } = require('../stores/fs')
 const { validatePassword } = require('../lib/password')
-const { setPrompt } = require('../mail')
 const actions = require('../actions')
 const { logo } = require('../../logo')
+const {
+  controller: stateController
+} = require('../middlewares/state.middleware')
+const { exec } = require('../commands')
 
 const router = express.Router()
 
 const rootUser = config.get('root.user')
 const rootPass = config.get('root.pass')
+
+const logger = require('../logger')
 
 /**
  * Add uuid to req.body.id and session
@@ -98,11 +103,12 @@ const loginUser = (req, res) => {
     }
   )
 
-  return res.json([
-    actions.clearHistory(),
-    actions.echo('Login Success!'),
-    ...setPrompt(req, res)
-  ])
+  // setup state for user
+  stateController(req, res, () => {})
+
+  logger.info(`User \`${username}\` logged in`)
+
+  return exec(req, res)
 }
 
 const validateLogin = (req, res) => {

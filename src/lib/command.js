@@ -5,12 +5,12 @@ const { parse } = require('shell-quote')
  * @param {string} line Line to parse for command
  * @returns {string} Command taken from string
  */
-const getCommand = line => parse(line)[0]
+const getCommand = (line = '') => parse(line)[0] || ''
 
 /**
  * Parses the args from a string
  * @param {string} line Line to parse for args
- * @returns {string} Args taken from string
+ * @returns {Array<string>} Args taken from string
  */
 const getArgs = line => parse(line).slice(1)
 
