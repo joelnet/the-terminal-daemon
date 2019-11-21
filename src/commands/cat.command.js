@@ -38,8 +38,15 @@ const exec = req => {
       actions.echo(
         servers
           .sort((serverA, serverB) => serverA.type - serverB.type)
-          .map(server => chalk`${server.address} {cyan  ${allServerTypes[server.type]} }`)
-          .join('\n') // prettier-ignore
+          .map(server => {
+            const { address } = server
+            const type = allServerTypes[server.type]
+            const packages = Array.isArray(server.packages)
+              ? JSON.stringify(server.packages)
+              : ''
+            return chalk`${address}  {cyan ${type}} {yellow ${packages}}`
+          })
+          .join('\n')
       )
     ]
   }
