@@ -1,6 +1,5 @@
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
-//const { name } = require('../cat.command')
 
 const test = () => true
 
