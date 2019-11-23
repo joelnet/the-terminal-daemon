@@ -106,7 +106,8 @@ const loginUser = (req, res) => {
   // setup state for user
   stateController(req, res, () => {})
 
-  logger.info(`User \`${username}\` logged in`)
+  const ip = req.header('x-forwarded-for') || req.connection.remoteAddress
+  logger.info(`User \`${username}\` logged in from ${ip}`)
 
   return exec(req, res)
 }
