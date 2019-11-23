@@ -14,5 +14,6 @@ const exec = execStrategy(strategies)
 module.exports = {
   sort: 10,
   test: test,
-  exec: exec
+  exec: exec,
+  name
 }
