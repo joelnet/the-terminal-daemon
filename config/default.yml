@@ -102,7 +102,7 @@ training:
         {cyan.green wallet package}
 copy:
   welcome-text: |
-    Welcome to Terminal
+    Welcome to Terminal v{VERSION}
 
     All connections are monitored and recorded
     Disconnect IMMEDIATELY if you are not authorized!

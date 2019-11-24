@@ -20,6 +20,8 @@ const rootPass = config.get('root.pass')
 
 const logger = require('../logger')
 
+const { version } = require('../../package.json')
+
 /**
  * Add uuid to req.body.id and session
  */
@@ -46,6 +48,7 @@ const promptLogin = (req, res) => {
   const welcomeText = `\n${logo}\n\n${boxen(
     config
       .get('copy.welcome-text')
+      .replace(/{VERSION}/g, version)
       .trim()
       .replace(/{ADDRESS}/g, chalk.red(ip)),
     { padding: 1, borderStyle: 'double' }
