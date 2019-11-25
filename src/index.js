@@ -25,4 +25,5 @@ const main = async () => {
 
 main().catch(err => {
   logger.error(err.stack || err)
+  process.exitCode = 1
 })
