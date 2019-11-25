@@ -6,6 +6,11 @@ const nscan = require('./nscan/discover-server')
 
 const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
 
+/**
+ * Is execStrategy attempting to PROMPT the user?
+ */
+const isPromptMode = response => response.some(({ type }) => type === 'PROMPT')
+
 const exec = async (req, res) => {
   const response = await execStrategy(strategies)(req, res)
 
@@ -17,7 +22,9 @@ const exec = async (req, res) => {
   const nscanCommands =
     req.state.nscan_end_at && nscan.test(req) ? nscan.exec(req) : []
 
-  const withPrompt = response.concat(setPrompt(req, res))
+  const withPrompt = isPromptMode(response)
+    ? response
+    : response.concat(setPrompt(req, res))
 
   const commands = []
     .concat(trainingCommands)
