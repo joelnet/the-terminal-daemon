@@ -9,9 +9,14 @@ logger.info('Starting')
 const host = config.get('server.host')
 const port = config.get('server.port')
 
+const safeExit = code => {
+  setTimeout(() => process.exit(1), 1000)
+  process.exitCode = code
+}
+
 process.on('uncaughtException', err => {
-  logger.info(`Error: ${err.stack || err}`)
-  process.exit(1)
+  logger.error(`Error: ${err.stack || err}`)
+  safeExit(1)
 })
 
 const main = async () => {
@@ -25,5 +30,5 @@ const main = async () => {
 
 main().catch(err => {
   logger.error(err.stack || err)
-  process.exitCode = 1
+  safeExit(1)
 })
