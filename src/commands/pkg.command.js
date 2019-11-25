@@ -88,7 +88,7 @@ E: Unable to locate package ${pkg}`
       tutorial.step2(req.session.username)
     }
 
-    if (pkg === 'coind' && server.type === 1) {
+    if (pkg === 'coind' && server.type === '1') {
       return [actions.echo(`pkg: coind cannot be installed on an iot device`)]
     }
 
