@@ -6,6 +6,7 @@ const files = [
       { name: 'adduser', type: 'f' },
       { name: 'clear', type: 'f' },
       { name: 'ls', type: 'f' },
+      { name: 'passwd', type: 'f' },
       { name: 'pkg', type: 'f' },
       { name: 'pwd', type: 'f' },
       { name: 'train', type: 'f' },
