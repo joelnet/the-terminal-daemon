@@ -48,9 +48,9 @@ const promptLogin = (req, res) => {
   const welcomeText = `\n${logo}\n\n${boxen(
     config
       .get('copy.welcome-text')
-      .replace(/{VERSION}/g, version)
       .trim()
-      .replace(/{ADDRESS}/g, chalk.red(ip)),
+      .replace(/{ADDRESS}/g, chalk.red(ip))
+      .replace(/{VERSION}/g, version),
     { padding: 1, borderStyle: 'double' }
   )}\n`
 
