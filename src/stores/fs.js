@@ -100,6 +100,7 @@ const db = new loki('./.data/database.db', {
 })
 
 module.exports = {
+  db,
   tables,
   onLoad
 }

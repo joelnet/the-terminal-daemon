@@ -3,28 +3,26 @@ const config = require('config')
 const express = require('express')
 const logger = require('./logger')
 const app = express()
+const { db } = require('./stores/fs')
+const { safeExit, onExit } = require('./safeExit')
 
 logger.info('Starting')
 
 const host = config.get('server.host')
 const port = config.get('server.port')
 
-const safeExit = code => {
-  setTimeout(() => process.exit(1), 1000)
-  process.exitCode = code
-}
-
-process.on('uncaughtException', err => {
-  logger.error(`Error: ${err.stack || err}`)
-  safeExit(1)
-})
-
 const main = async () => {
   await routes({ app, path: __dirname + '/middlewares/**/*.middleware.js' })
   await routes({ app, path: __dirname + '/controllers/**/*.controller.js' })
 
-  app.listen(port, host, () => {
+  const server = app.listen(port, host, () => {
     logger.info(`Listening on http://${host}:${port}`)
+  })
+
+  onExit(() => {
+    logger.warn('Application exiting.')
+    db.close()
+    server.close()
   })
 }
 
