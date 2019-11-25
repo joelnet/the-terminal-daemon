@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
-const coind = require('../commands/coind.command')
+const coind = require('../commands/coind/coind.command')
 const nscan = require('../commands/nscan/nscan.command')
 const wallet = require('../commands/wallet/wallet.command')
 const xssh = require('../commands/xssh.command')
@@ -86,6 +86,10 @@ E: Unable to locate package ${pkg}`
 
     if (pkg === 'nscan') {
       tutorial.step2(req.session.username)
+    }
+
+    if (pkg === 'coind' && server.type === '1') {
+      return [actions.echo(`pkg: coind cannot be installed on an iot device`)]
     }
 
     server.packages.push(pkg)
