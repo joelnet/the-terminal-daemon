@@ -8,7 +8,7 @@ The Terminal is a hacker game played in the terminal.
 
 Need Help? Want to give Feedback?
 
-[Join the Discord chat!](https://discordapp.com/invite/Gg7ptD5)
+[![Join our Discord!](https://raw.githubusercontent.com/joelnet/the-terminal-daemon/master/assets/discord.png)](https://discordapp.com/invite/Gg7ptD5)
 
 # Playing The Game
 
