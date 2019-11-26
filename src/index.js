@@ -15,7 +15,12 @@ const main = async () => {
   await routes({ app, path: __dirname + '/middlewares/**/*.middleware.js' })
   await routes({ app, path: __dirname + '/controllers/**/*.controller.js' })
 
-  const server = app.listen(port, host, () => {
+  const server = app.listen(port, host, err => {
+    if (err) {
+      logger.error(err)
+      return safeExit(1)
+    }
+
     logger.info(`Listening on http://${host}:${port}`)
   })
 
