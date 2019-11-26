@@ -1,4 +1,5 @@
 # The Terminal
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 The Terminal is a hacker game played in the terminal.
@@ -30,7 +31,7 @@ npm i -g the-terminal
 npx the-terminal
 ```
 
-Follow the directions in *Create an Account* to start playing
+Follow the directions in _Create an Account_ to start playing
 
 # Create an Account
 
@@ -84,6 +85,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://joel.net"><img src="https://avatars3.githubusercontent.com/u/742630?v=4" width="100px;" alt="joelnet"/><br /><sub><b>joelnet</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=joelnet" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/sowmiyamuthuraman"><img src="https://avatars0.githubusercontent.com/u/32141844?v=4" width="100px;" alt="sowmiyamuthuraman"/><br /><sub><b>sowmiyamuthuraman</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=sowmiyamuthuraman" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Krayorn"><img src="https://avatars2.githubusercontent.com/u/25324366?v=4" width="100px;" alt="Nathael Arki"/><br /><sub><b>Nathael Arki</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=Krayorn" title="Code">💻</a></td>
   </tr>
 </table>
 
