@@ -22,6 +22,51 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "guy-baron1",
+      "name": "guy-baron1",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/29865682?v=4",
+      "profile": "https://github.com/guy-baron1",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "evanplaice",
+      "name": "Evan Plaice",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/303159?v=4",
+      "profile": "http://evanplaice.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sowmiyamuthuraman",
+      "name": "sowmiyamuthuraman",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32141844?v=4",
+      "profile": "https://github.com/sowmiyamuthuraman",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Firstbober",
+      "name": "Firstbober",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/22197465?v=4",
+      "profile": "https://github.com/Firstbober",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Krayorn",
+      "name": "Nathael Arki",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/25324366?v=4",
+      "profile": "https://github.com/Krayorn",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
