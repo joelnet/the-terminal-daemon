@@ -13,6 +13,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "evanplaice",
+      "name": "Evan Plaice",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/303159?v=4",
+      "profile": "http://evanplaice.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
