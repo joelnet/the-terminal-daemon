@@ -1,0 +1,41 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "joelnet",
+      "name": "joelnet",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/742630?v=4",
+      "profile": "http://joel.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sowmiyamuthuraman",
+      "name": "sowmiyamuthuraman",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32141844?v=4",
+      "profile": "https://github.com/sowmiyamuthuraman",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Krayorn",
+      "name": "Nathael Arki",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/25324366?v=4",
+      "profile": "https://github.com/Krayorn",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "the-terminal-daemon",
+  "projectOwner": "joelnet",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
