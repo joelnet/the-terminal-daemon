@@ -1,6 +1,6 @@
 # The Terminal
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
 The Terminal is a hacker game played in the terminal.
 
@@ -84,6 +84,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://joel.net"><img src="https://avatars3.githubusercontent.com/u/742630?v=4" width="100px;" alt="joelnet"/><br /><sub><b>joelnet</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=joelnet" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/DaveSalazar"><img src="https://avatars3.githubusercontent.com/u/13337220?v=4" width="100px;" alt="DaveSalazar"/><br /><sub><b>DaveSalazar</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=DaveSalazar" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dnafication"><img src="https://avatars3.githubusercontent.com/u/6381587?v=4" width="100px;" alt="Dinanath"/><br /><sub><b>Dinanath</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=dnafication" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/guy-baron1"><img src="https://avatars3.githubusercontent.com/u/29865682?v=4" width="100px;" alt="guy-baron1"/><br /><sub><b>guy-baron1</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=guy-baron1" title="Code">💻</a></td>
     <td align="center"><a href="http://evanplaice.com"><img src="https://avatars1.githubusercontent.com/u/303159?v=4" width="100px;" alt="Evan Plaice"/><br /><sub><b>Evan Plaice</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=evanplaice" title="Code">💻</a></td>
