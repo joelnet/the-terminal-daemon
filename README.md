@@ -4,13 +4,13 @@
 
 The Terminal is a hacker game played in the terminal.
 
-# Help / Feedback
+## Help / Feedback
 
 Need Help? Want to give Feedback?
 
 [![Join our Discord!](https://raw.githubusercontent.com/joelnet/the-terminal-daemon/master/assets/discord.png)](https://discordapp.com/invite/Gg7ptD5)
 
-# Playing The Game
+## Playing The Game
 
 Start playing the game here: [the-terminal-cli](https://www.npmjs.com/package/the-terminal)
 
