@@ -73,18 +73,18 @@ training:
       have the ability to transmit data.
 
       {bold Reward:}
-        {cyan.green nscan for IoT devices}
+        {cyan.green nscan iot}
   scan-03:
-    time: 3600 # 1 hour
+    time: 86400 # 1 day
     require: ['training:scan-02']
-    headline: Internet of Things Devices
+    headline: Home PC
     body: |
-      IoT devices, or any of the many things in the internet of things, are
-      nonstandard computing devices that connect wirelessly to a network and
-      have the ability to transmit data.
+      Home PCs connected directly to the internet offer an entrypoint into a
+      users home network. Home PCs have a treasure trove of personal information
+      that is easily exploitable for profits.
 
       {bold Reward:}
-        {cyan.green nscan for IoT devices}
+        {cyan.green nscan pc}
   crypto-01:
     time: 60 # 1 minute
     require: ['training:scan-01']
@@ -181,5 +181,6 @@ mail:
 coins:
   reward: 0.1
 serverTypes:
-  0: 'unknown'
-  1: 'iot'
+  0: unknown
+  1: iot
+  2: pc

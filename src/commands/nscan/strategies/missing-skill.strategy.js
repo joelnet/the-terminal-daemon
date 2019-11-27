@@ -3,16 +3,29 @@ const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { trainingSelector } = require('../../../stores/selectors')
 
+const types = {
+  iot: 'scan-02',
+  pc: 'scan-03'
+}
+
 const test = req => {
   const [arg] = getArgs(req.body.line)
   const { state } = req
 
-  return arg === 'iot' && !trainingSelector(state).includes('scan-02')
+  return (
+    (arg === 'iot' && !trainingSelector(state).includes(types[arg])) ||
+    (arg === 'pc' && !trainingSelector(state).includes(types[arg]))
+  )
 }
 
-const exec = () => [
-  actions.echo(chalk`{red.bold Error:} skill {cyan.bold scan-02} missing.`)
-]
+const exec = req => {
+  const [type] = getArgs(req.body.line)
+  return [
+    actions.echo(
+      chalk`{red.bold Error:} skill {cyan.bold ${types[type]}} missing.`
+    )
+  ]
+}
 
 module.exports = {
   sort: 10,
