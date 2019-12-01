@@ -3,6 +3,9 @@ const { sessions } = require('./stores/memory')
 const actions = require('./actions')
 const { getMail, isUnread } = require('./mail')
 const { getHumanizedDuration } = require('./lib/time')
+const { tables } = require('./stores/fs')
+const { canCollect } = require('./commands/wallet/strategies/collect.strategy')
+const { getServer } = require('./commands/pkg.command')
 
 const getMailPrompt = req => {
   const { username } = sessions.find({ id: { $eq: req.body.id } })[0]
@@ -45,6 +48,24 @@ const getNscanPrompt = req => {
   return chalk.bgCyan.black(duration)
 }
 
+const getWalletPrompt = req => {
+  const { session, state } = req
+  const { username, env } = session
+
+  const server = getServer(username, env.HOST)
+
+  if (!server.packages.some(p => p === 'wallet')) {
+    return ''
+  }
+
+  if (canCollect(state)) {
+    return chalk.bgBlack.green(' wallet: ready! ')
+  }
+
+  const { coins = '0' } = tables.state.get(username)
+  return chalk.bgBlack.green(` Balance: ${Number(coins).toFixed(8)} `)
+}
+
 const getPwd = req =>
   req.session.env.PWD === `/home/${req.session.env.USER}`
     ? '~'
@@ -56,6 +77,8 @@ const setPrompt = req => {
   const mailPrompt = getMailPrompt(req)
   const trainingPrompt = getTrainingPrompt(req)
   const nscanPrompt = getNscanPrompt(req)
+  const walletPrompt = getWalletPrompt(req)
+
   const pwd = chalk.red(getPwd(req))
 
   // TODO: this logic is confusing. clean it up.
@@ -65,7 +88,7 @@ const setPrompt = req => {
   const promptTop =
     req.session.env.HOST !== 'home'
       ? chalk`\n┌ {bgRed.black  HACKED: ${req.session.env.HOST} }`
-      : chalk`\n┌ ${mailPrompt}${trainingPrompt}${nscanPrompt}`
+      : chalk`\n┌ ${mailPrompt}${trainingPrompt}${nscanPrompt}${walletPrompt}`
 
   const promptBottom =
     displayName === 'root' && req.session.env.HOST === 'home'
