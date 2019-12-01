@@ -57,7 +57,7 @@ const doCollect = (req, state) => {
 }
 
 const exec = req => {
-  const state = tables.state.get(req.session.username)
+  const { state } = req
   logger.debug(`\`wallet collect\` executed by \`${req.session.username}\``)
   return !canCollect(state) ? cannotCollect(state) : doCollect(req, state)
 }

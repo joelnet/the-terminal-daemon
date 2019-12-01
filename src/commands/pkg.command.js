@@ -1,18 +1,13 @@
 // TODO: use strategy pattern, like wallet
 const chalk = require('chalk')
+const config = require('config')
 const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
-const coind = require('../commands/coind/coind.command')
-const nscan = require('../commands/nscan/nscan.command')
-const wallet = require('../commands/wallet/wallet.command')
-const xssh = require('../commands/xssh.command')
-const { isTrained, findLessonByReward } = require('../training')
 const tutorial = require('../tutorial')
+const { meetsRequirement } = require('./train.command.js')
 
 const name = 'pkg'
-
-const packages = [nscan.name, xssh.name, coind.name, wallet.name]
 
 const generateLog = ({ pkg, size }) =>
   `Reading package lists...
@@ -36,7 +31,8 @@ const test = isCommand(name)
 
 const exec = req => {
   const [action, pkg] = getArgs(req.body.line)
-  const { username, env } = req.session
+  const { session, state } = req
+  const { username, env } = session
 
   if (req.session.username === 'root') {
     return [actions.echo(chalk.red(`E: ${name}: root is restricted`))]
@@ -50,52 +46,61 @@ const exec = req => {
     return [actions.echo(`pkg: Invalid operation ${action}`)]
   }
 
-  if (req.session.env.HOST !== 'home' && pkg === 'wallet') {
-    return `Reading package lists...
-Building dependency tree...
-Reading state information...
-E: Unable to locate package ${pkg}`
-      .split('\n')
-      .map(log => actions.echo(log, { delay: Math.random() * 500 }))
+  const [, packageOptions] =
+    Object.entries(config.get('packages')).find(([name]) => name === pkg) || []
+
+  if (!packageOptions) {
+    return [actions.echo(`pkg: Invalid package ${pkg}`)]
   }
 
-  if (packages.some(p => p === pkg)) {
-    const server =
-      tables.servers.find({ owner: username, address: env.HOST })[0] ||
-      tables.servers.insert({
-        owner: username,
-        address: env.HOST,
-        packages: []
-      })
-
-    server.packages = server.packages || []
-
-    if (server.packages.some(p => p === pkg)) {
-      return [actions.echo(`pkg: Already installed ${pkg}`)]
-    }
-
-    const [lessonName, lesson] = findLessonByReward(`pkg:${pkg}`) || []
-
-    if (lesson && !isTrained(lessonName)(req.state)) {
-      return [
-        actions.echo(
-          chalk`{cyan.bold ${pkg}} Cannot be installed\nRequired skill {cyan.bold ${lessonName}} is missing.`
-        )
-      ]
-    }
-
-    if (pkg === 'nscan') {
-      tutorial.step2(req.session.username)
-    }
-
-    if (pkg === 'coind' && server.type === '1') {
-      return [actions.echo(`pkg: coind cannot be installed on an iot device`)]
-    }
-
-    server.packages.push(pkg)
-    tables.servers.update(server)
-    return generateLog({ pkg, size: '1,668 kB' })
+  if (
+    (req.session.env.HOST === 'home' && !packageOptions.home) ||
+    (req.session.env.HOST !== 'home' && !packageOptions.remote)
+  ) {
+    return [
+      actions.echo(
+        chalk.red(`pkg: ${pkg} cannot be installed on ${req.session.env.HOST}`)
+      )
+    ]
   }
+
+  const invalid = (packageOptions.require || [])
+    .filter(requirement => !meetsRequirement({ session, requirement, state }))
+    .map(requirement => {
+      const [, lessonName] = requirement.split(':')
+      return actions.echo(
+        chalk`{cyan.bold ${pkg}} Cannot be installed. Required skill {cyan.bold ${lessonName}} is missing.`
+      )
+    })
+  if (invalid.length > 0) {
+    return invalid
+  }
+
+  const server =
+    tables.servers.find({ owner: username, address: env.HOST })[0] ||
+    tables.servers.insert({
+      owner: username,
+      address: env.HOST,
+      packages: []
+    })
+
+  server.packages = server.packages || []
+
+  if (server.packages.some(p => p === pkg)) {
+    return [actions.echo(`pkg: Already installed ${pkg}`)]
+  }
+
+  if (pkg === 'nscan') {
+    tutorial.step2(req.session.username)
+  }
+
+  if (pkg === 'coind' && server.type === '1') {
+    return [actions.echo(`pkg: ${pkg} cannot be installed on an iot device`)]
+  }
+
+  server.packages.push(pkg)
+  tables.servers.update(server)
+  return generateLog({ pkg, size: '1,667 kB' })
 
   return [actions.echo(`pkg: Invalid package ${pkg}`)]
 }

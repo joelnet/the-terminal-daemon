@@ -1,5 +1,4 @@
 // TODO: use strategy pattern, like wallet
-// TODO: do not store training on user, but in tables.state
 const chalk = require('chalk')
 const config = require('config')
 const { allPass } = require('mojiscript')
@@ -7,15 +6,19 @@ const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { tables } = require('../stores/fs')
 const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
-const { fileExists } = require('../filesystem/fileExists')
 const { getHumanizedDuration } = require('../lib/time')
 const { chalkTemplate } = require('../lib/strings')
 const logger = require('../logger')
 const tutorial = require('../tutorial')
+const {
+  getAllTraining,
+  meetsRequirement,
+  getAvailableTraining
+} = require('../features/training')
 
 const name = 'train'
 
-const allTraining = config.get('training')
+const allTraining = getAllTraining()
 
 const getTime = state =>
   getHumanizedDuration(Date.parse(state.training_currently.end_at), Date.now())
@@ -24,43 +27,6 @@ const humanizeLesson = ([name, value]) =>
   chalk`{bold.cyan ${name}: ${value.headline}}
   
   ${chalkTemplate(value.body.replace(/\n/g, '\n  '))}`
-
-const meetsRequirement = ({
-  session,
-  requirement,
-  state: { username, training = [] }
-}) =>
-  (requirement.startsWith('training:') &&
-    training.some(t => t === requirement.substr(9))) ||
-  (requirement.startsWith('command:') &&
-    fileExists({ dir: '/bin/nscan', username, session }))
-
-const getAvailableTraining = ({
-  session,
-  state: { username, training = [] }
-}) => {
-  return Object.keys(allTraining)
-    .map(key => [key, allTraining[key]])
-    .filter(([key, value]) => {
-      // already have trained
-      if (training.some(k => k === key)) return false
-
-      // meets requirement
-      if (
-        (value.require || []).every(requirement =>
-          meetsRequirement({
-            session,
-            requirement,
-            state: { username, training }
-          })
-        )
-      ) {
-        return true
-      }
-
-      return false
-    })
-}
 
 const isScanRunning = state =>
   state.training_currently &&
@@ -71,14 +37,14 @@ const completeTraining = req => {
   const lesson = req.state.training_currently.lesson
   const rewards = config.get('training')[lesson].rewards || []
 
-  // TODO: Calculate User Luck and set new value
-
   req.state.training = req.state.training || []
   req.state.training.push(req.state.training_currently.lesson)
   delete req.state.training_currently
   tables.state.update(req.state)
 
+  // TODO: figure out better solution for tutorial
   tutorial.step4(req.session.username, lesson)
+  tutorial.step7(req.session.username, lesson)
 
   return [
     actions.echo(
@@ -104,7 +70,28 @@ const exec = req => {
     state: req.state
   })
 
+  if ((req.state.training || []).some(t => t === arg)) {
+    return [
+      actions.echo(chalk`${name}: You have already trained {cyan.bold ${arg}}`)
+    ]
+  }
+
   if (arg != null && !myTraining.some(([key]) => key === arg)) {
+    if (allTraining[arg]) {
+      const requires = (allTraining[arg].require || [])
+        .filter(training => {
+          const trainingName = training.split(':')[1]
+          return (req.state.training || []).includes(trainingName) === false
+        })
+        .map(s => s.split(':')[1])
+        .join(' ')
+      return [
+        actions.echo(
+          chalk`${name}: Cannot train {cyan.bold ${arg}}. Required training not met: {cyan.bold ${requires}}`
+        )
+      ]
+    }
+
     return [actions.echo(`${name}: ${arg}: Not a valid option`)]
   }
 
@@ -157,5 +144,6 @@ module.exports = {
   exec,
   name,
   isScanRunning,
-  completeTraining
+  completeTraining,
+  meetsRequirement
 }

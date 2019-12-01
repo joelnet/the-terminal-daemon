@@ -23,5 +23,6 @@ const exec = req =>
 module.exports = {
   sort: 10,
   test,
-  exec
+  exec,
+  setSessionToHomeServer
 }

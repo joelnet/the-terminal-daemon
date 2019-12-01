@@ -61,7 +61,16 @@ const step5 = username => {
  */
 const step6 = (username, coins) => {
   if (Number(coins) > 0 === false) return
-  nextMail(username, 'wallet', 'last')
+  nextMail(username, 'wallet', 'cryptolock')
+}
+
+/**
+ * @param {string} username
+ * @param {string} lesson
+ */
+const step7 = (username, lesson) => {
+  if (lesson !== 'crypto-02') return
+  nextMail(username, 'cryptolock', 'ransom')
 }
 
 module.exports = {
@@ -70,5 +79,6 @@ module.exports = {
   step3,
   step4,
   step5,
-  step6
+  step6,
+  step7
 }

@@ -75,7 +75,7 @@ training:
       {bold Reward:}
         {cyan.green nscan iot}
   scan-03:
-    time: 86400 # 1 day
+    time: 3600 # 1 hour
     require: ['training:scan-02']
     headline: Home PC
     body: |
@@ -100,6 +100,18 @@ training:
       {bold Reward:}
         {cyan.green coind package}
         {cyan.green wallet package}
+  crypto-02:
+    time: 300 # 5 minutes
+    require: ['training:crypto-01', 'training:scan-03']
+    rewards: ['pkg:cryptolock']
+    headline: Applied Cryptography
+    body: |
+      Cryptography is present in everyday life, from paying with a credit card
+      to using the telephone. Learn all about making and breaking puzzles
+      in computing.
+
+      {bold Reward:}
+        {cyan.green cryptolock package}
 copy:
   welcome-text: |
     Welcome to Terminal v{VERSION}
@@ -149,6 +161,7 @@ mail:
 
       It's time to get paid. So start learning about crypto-currencies.
 
+      - X
     tasks:
       - { train: crypto-01 }
   xssh:
@@ -157,6 +170,7 @@ mail:
 
       Hack one of your servers.
 
+        $ {cyan.bold pkg install xssh}
         $ {cyan.bold cat ~/servers}
         $ {cyan.bold xssh <server>}
 
@@ -165,8 +179,10 @@ mail:
         $ {cyan.bold pkg install coind}
         $ {cyan.bold coind start}
         $ {cyan.bold exit}
+
+      - X
   wallet:
-    text: |
+    text: |+
       Install a {cyan.bold wallet} to hold your {cyan.bold coin}.
 
       Use the {cyan.bold wallet} to {cyan.bold collect} your {cyan.bold coin}
@@ -175,12 +191,58 @@ mail:
         $ {cyan.bold pkg install wallet}
         $ {cyan.bold wallet collect}
         $ {cyan.bold wallet balance}
-  last:
+
+      - X
+  cryptolock:
     text: |
-      TODO: fill out last steps
+      Running crypto miners is just one of many way to make money in this world.
+
+      If you want to make real money, you're gonna have to do some dirt.
+
+      Keep training until you have learned {cyan.bold Applied Cryptography}.
+
+      Then I'll walk you through your first ransom.
+
+      - X
+    tasks:
+      - { train: crypto-02 }
+  ransom:
+    text: |
+      Users never back up their computers. If they did, it'd be bad news for us.
+
+      Fortunately, their stupidity is easily exploitable.
+
+      Scan for a Personal Computer, then {cyan.bold cryptolock} it.
+
+      - X
+    tasks:
+      - { run: nscan pc }
+      - { run: cryptolock }
 coins:
   reward: 0.1
 serverTypes:
   0: unknown
   1: iot
   2: pc
+packages:
+  nscan:
+    require: ['training:scan-01']
+    home: true
+    remote: false
+  cryptolock:
+    require: ['training:crypto-02']
+    home: false
+    remote: true
+    bounty: 2
+  xssh:
+    require: []
+    home: true
+    remote: false
+  coind:
+    require: ['training:crypto-01']
+    home: true
+    remote: true
+  wallet:
+    require: ['training:crypto-01']
+    home: true
+    remote: false
