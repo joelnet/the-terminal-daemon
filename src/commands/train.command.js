@@ -20,10 +20,19 @@ const allTraining = config.get('training')
 const getTime = state =>
   getHumanizedDuration(Date.parse(state.training_currently.end_at), Date.now())
 
-const humanizeLesson = ([name, value]) =>
-  chalk`{bold.cyan ${name}: ${value.headline}}
-  
-  ${chalkTemplate(value.body.replace(/\n/g, '\n  '))}`
+const humanizeLesson = ([name, value]) => {
+  const futureDate = new Date()
+  futureDate.setSeconds(futureDate.getSeconds() + value.time)
+
+  return chalk`{bold.cyan ${name}: ${value.headline}}
+
+  ${chalkTemplate(value.body.replace(/\n/g, '\n  '))}
+
+  {bold Estimated time completion:}
+    ${getHumanizedDuration(futureDate, Date.now())}${'\n  '}
+
+  ${chalkTemplate(value.reward.replace(/\n/g, '\n  '))}`
+}
 
 const meetsRequirement = ({
   session,
