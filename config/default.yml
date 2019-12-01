@@ -27,7 +27,7 @@ training:
       the probability of "tails"; and since no other outcomes are possible, the
       probability of either "heads" or "tails" is 1/2
       (which could also be written as 0.5 or 50%).
-
+    reward: |
       {bold Reward:}
         {cyan.green +1 luck}
   luck-02:
@@ -44,7 +44,7 @@ training:
       system can result in large differences in a later state, meaning there is
       sensitive dependence on initial conditions. A metaphor for this behavior is
       that a butterfly flapping its wings in China can cause a hurricane in Texas.
-
+    reward: |
       {bold Reward:}
         {cyan.green +1 luck}
   scan-01:
@@ -60,7 +60,7 @@ training:
       name and version) those hosts are offering, what operating systems
       (and OS versions) they are running, what type of packet filters/firewalls are
       in use, and dozens of other characteristics.
-
+    reward: |
       {bold Reward:}
         {cyan.green nscan}
   scan-02:
@@ -71,7 +71,7 @@ training:
       IoT devices, or any of the many things in the internet of things, are
       nonstandard computing devices that connect wirelessly to a network and
       have the ability to transmit data.
-
+    reward: |
       {bold Reward:}
         {cyan.green nscan iot}
   scan-03:
@@ -82,7 +82,7 @@ training:
       Home PCs connected directly to the internet offer an entrypoint into a
       users home network. Home PCs have a treasure trove of personal information
       that is easily exploitable for profits.
-
+    reward: |
       {bold Reward:}
         {cyan.green nscan pc}
   crypto-01:
@@ -96,7 +96,7 @@ training:
       transactions, control the creation of additional units, and verify the
       transfer of assets. Cryptocurrencies use decentralized control as opposed
       to centralized digital currency and central banking systems.
-
+    reward: |
       {bold Reward:}
         {cyan.green coind package}
         {cyan.green wallet package}
