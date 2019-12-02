@@ -63,7 +63,7 @@ const getWalletPrompt = req => {
   }
 
   const { coins = '0' } = tables.state.get(username)
-  return chalk.bgBlack.green(` Balance: ${Number(coins).toFixed(8)} `)
+  return chalk.green.inverse(` coin: ${Number(coins).toFixed(8)} `)
 }
 
 const getPwd = req =>
