@@ -1,7 +1,8 @@
 const chalk = require('chalk')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
-const { name } = require('../wallet.command')
+
+const name = 'wallet'
 
 const test = req => {
   const [command] = getArgs(req.body.line)

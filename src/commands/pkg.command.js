@@ -29,6 +29,20 @@ Setting up ${pkg} ...`
 
 const test = isCommand(name)
 
+const getServer = (owner, address) => {
+  const server =
+    tables.servers.find({ owner, address })[0] ||
+    tables.servers.insert({
+      owner,
+      address,
+      packages: []
+    })
+
+  server.packages = server.packages || []
+
+  return server
+}
+
 const exec = req => {
   const [action, pkg] = getArgs(req.body.line)
   const { session, state } = req
@@ -76,15 +90,7 @@ const exec = req => {
     return invalid
   }
 
-  const server =
-    tables.servers.find({ owner: username, address: env.HOST })[0] ||
-    tables.servers.insert({
-      owner: username,
-      address: env.HOST,
-      packages: []
-    })
-
-  server.packages = server.packages || []
+  const server = getServer(username, env.HOST)
 
   if (server.packages.some(p => p === pkg)) {
     return [actions.echo(`pkg: Already installed ${pkg}`)]
@@ -108,5 +114,6 @@ const exec = req => {
 module.exports = {
   sort: 10,
   test,
-  exec
+  exec,
+  getServer
 }
