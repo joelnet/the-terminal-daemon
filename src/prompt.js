@@ -6,6 +6,7 @@ const { getHumanizedDuration } = require('./lib/time')
 const { tables } = require('./stores/fs')
 const { canCollect } = require('./commands/wallet/strategies/collect.strategy')
 const { getServer } = require('./commands/pkg.command')
+const { getTime } = require('./features/time')
 
 const getMailPrompt = req => {
   const { username } = sessions.find({ id: { $eq: req.body.id } })[0]
@@ -66,6 +67,8 @@ const getWalletPrompt = req => {
   return chalk.green.inverse(` coin: ${Number(coins).toFixed(8)} `)
 }
 
+const getTimePrompt = req => chalk.white.inverse(` time: ${getTime({ req })} `)
+
 const getPwd = req =>
   req.session.env.PWD === `/home/${req.session.env.USER}`
     ? '~'
@@ -78,6 +81,7 @@ const setPrompt = req => {
   const trainingPrompt = getTrainingPrompt(req)
   const nscanPrompt = getNscanPrompt(req)
   const walletPrompt = getWalletPrompt(req)
+  const timePrompt = getTimePrompt(req)
 
   const pwd = chalk.red(getPwd(req))
 
@@ -88,7 +92,7 @@ const setPrompt = req => {
   const promptTop =
     req.session.env.HOST !== 'home'
       ? chalk`\n┌ {bgRed.black  HACKED: ${req.session.env.HOST} }`
-      : chalk`\n┌ ${mailPrompt}${trainingPrompt}${nscanPrompt}${walletPrompt}`
+      : chalk`\n┌ ${mailPrompt}${timePrompt}${trainingPrompt}${nscanPrompt}${walletPrompt}`
 
   const promptBottom =
     displayName === 'root' && req.session.env.HOST === 'home'
