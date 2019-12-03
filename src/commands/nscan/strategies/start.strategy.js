@@ -17,7 +17,7 @@ const exec = req => {
   const servers = tables.servers.find({ owner: { $eq: username } })
   const isLucky = isUserLucky(servers)
 
-  const duration = config.get('commands.nscan.scan-time')
+  const duration = config.get('packages.nscan.scan-time')
   req.state.nscan_end_at = isLucky
     ? new Date()
     : new Date(Date.now() + duration * 1000)

@@ -6,11 +6,6 @@ logs:
 root:
   user: root
   pass: admin123
-commands:
-  nscan:
-    scan-time: 14400 # 4 hours
-  wallet:
-    cooldown: 14400 # 4 hours
 luck:
   nscan: 0.01 # 1%
 training:
@@ -229,6 +224,7 @@ packages:
     require: ['training:scan-01']
     home: true
     remote: false
+    scan-time: 7200 # 2 hours
   cryptolock:
     require: ['training:crypto-02']
     home: false
@@ -246,3 +242,4 @@ packages:
     require: ['training:crypto-01']
     home: true
     remote: false
+    cooldown: 14400 # 4 hours

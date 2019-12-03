@@ -9,7 +9,7 @@ const { add } = require('../../../lib/coinmath')
 const logger = require('../../../logger')
 
 const reward = config.get('coins.reward')
-const cooldown = config.get('commands.wallet.cooldown')
+const cooldown = config.get('packages.wallet.cooldown')
 const packagesSelector = ({ packages }) => packages || []
 const statusSelector = ({ state }) => state && state.COIND && state.COIND.status
 
