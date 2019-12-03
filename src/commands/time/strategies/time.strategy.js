@@ -1,6 +1,6 @@
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
-const { addSpan } = require('../../../features/time')
+const { addSpan, getNextTimeRelease } = require('../../../features/time')
 
 const test = req => {
   const [arg] = getArgs(req.body.line)

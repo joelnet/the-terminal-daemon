@@ -27,6 +27,7 @@ training:
   time-02:
     time: 300 # 5 minutes
     require: ['training:time-01']
+    rewards: ['minutes:120']
     headline: Illusion of Time
     body: |
       Time is merely a perspective, rather than a universal truth. It's a point
@@ -42,6 +43,7 @@ training:
   time-03:
     time: 3600 # 1 hour
     require: ['training:time-02']
+    rewards: ['minutes:120']
     headline: 'Time Travel: Theories, Paradoxes & Possibilities'
     body: |
       Time travel — moving between different points in time — has been a popular
@@ -59,6 +61,7 @@ training:
   time-04:
     time: 86400 # 1 day
     require: ['training:time-03']
+    rewards: ['minutes:120']
     headline: Quantum Theory of Time
     body: |
       One of the weirder aspects of quantum mechanics could be explained by
@@ -74,6 +77,7 @@ training:
   time-05:
     time: 2592000 # 1 month
     require: ['training:time-04']
+    rewards: ['minutes:120']
     headline: A/B theory of time
     body: |
       The A-theory of time is typically associated with the idea that the present
@@ -87,6 +91,7 @@ training:
   time-06:
     time: 7776000 # 3 months
     require: ['training:time-05']
+    rewards: ['minutes:120']
     headline: Ultimate Theory of Time
     body: |
       Time moves forward, not backward—everyone knows you can't unscramble an egg.
