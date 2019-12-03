@@ -9,6 +9,7 @@ const files = [
       { name: 'passwd', type: 'f' },
       { name: 'pkg', type: 'f' },
       { name: 'pwd', type: 'f' },
+      { name: 'time', type: 'f' },
       { name: 'train', type: 'f' },
       { name: 'whoami', type: 'f' }
     ]

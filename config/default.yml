@@ -9,6 +9,96 @@ root:
 luck:
   nscan: 0.01 # 1%
 training:
+  time-01:
+    time: 60 # 1 minute
+    rewards: ['minutes:120']
+    headline: Physics of Time
+    body: |
+      Time in physics is defined by its measurement: time is what a clock reads.
+      In classical, non-relativistic physics it is a scalar quantity and, like length,
+      mass, and charge, is usually described as a fundamental quantity. Time can be
+      combined mathematically with other physical quantities to derive other concepts
+      such as motion, kinetic energy and time-dependent fields. Timekeeping is a
+      complex of technological and scientific issues, and part of the foundation
+      of recordkeeping.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
+  time-02:
+    time: 300 # 5 minutes
+    require: ['training:time-01']
+    headline: Illusion of Time
+    body: |
+      Time is merely a perspective, rather than a universal truth. It's a point
+      of view that humans share as a result of our biology and evolution,
+      our place on Earth, and the planet's place in the universe.
+
+      “From our perspective, the perspective of creatures who make up a small part
+      of the world—we see that world flowing in time.” At the quantum level, however,
+      durations are so short that they can't be divided and there is no such thing as time.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
+  time-03:
+    time: 3600 # 1 hour
+    require: ['training:time-02']
+    headline: 'Time Travel: Theories, Paradoxes & Possibilities'
+    body: |
+      Time travel — moving between different points in time — has been a popular
+      topic for science fiction for decades. Franchises ranging from "Doctor Who"
+      to "Star Trek" to "Back to the Future" have seen humans get in a vehicle
+      of some sort and arrive in the past or future, ready to take on
+      new adventures. Each come with their own time travel theories.
+
+      The reality, however, is more muddled. Not all scientists believe that
+      time travel is possible. Some even say that an attempt would be fatal
+      to any human who chooses to undertake it.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
+  time-04:
+    time: 86400 # 1 day
+    require: ['training:time-03']
+    headline: Quantum Theory of Time
+    body: |
+      One of the weirder aspects of quantum mechanics could be explained by
+      an equally weird idea – that causation can run backwards in time
+      as well as forwards.
+
+      What Einstein called "spooky" action at a distance could theoretically
+      be evidence of retrocausality, which is the particle equivalent of you
+      getting a stomach ache today thanks to tomorrow's bad lunch.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
+  time-05:
+    time: 2592000 # 1 month
+    require: ['training:time-04']
+    headline: A/B theory of time
+    body: |
+      The A-theory of time is typically associated with the idea that the present
+      is metaphysically privileged or singled out in some way from past and future times.
+
+      The B-theory of time, in contrast, denies that the present is metaphysically
+      privileged over past and future times.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
+  time-06:
+    time: 7776000 # 3 months
+    require: ['training:time-05']
+    headline: Ultimate Theory of Time
+    body: |
+      Time moves forward, not backward—everyone knows you can't unscramble an egg.
+      That simple fact of breakfast becomes a doorway to understanding the
+      Big Bang, the universe, and other universes, too. The arrow of time,
+      pointing resolutely from the past to the future, owes its existence to
+      conditions before the Big Bang itself — a period modern cosmology of
+      which Einstein never dreamed. Increasingly, though, physicists are
+      going out into realms that make the theory of relativity seem like child's play.
+    reward: |
+      {bold Reward:}
+        {cyan.bold 120 minutes}
   luck-01:
     time: 300 # 5 minutes
     require: ['training:scan-02']
