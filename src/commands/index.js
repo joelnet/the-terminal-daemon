@@ -1,4 +1,7 @@
+//@ts-check
+const { default: chalk } = require('chalk')
 const path = require('path')
+const actions = require('../actions')
 const { setPrompt } = require('../prompt')
 const { getStrategies, execStrategy } = require('../lib/strategies')
 const { isScanRunning, completeTraining } = require('./train.command')
@@ -9,6 +12,7 @@ const {
   collectTime
 } = require('../features/time')
 const { tables } = require('../stores/fs')
+const logger = require('../logger')
 
 const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
 
@@ -17,8 +21,17 @@ const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
  */
 const isPromptMode = response => response.some(({ type }) => type === 'PROMPT')
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = async (req, res) => {
-  const response = await execStrategy(strategies)(req, res)
+  let response
+  try {
+    response = await execStrategy(strategies)(req, res)
+  } catch (err) {
+    logger.error(err)
+    return res.json(actions.echo(chalk.red(`Unhandled Error: ${err.stack}`)))
+  }
 
   if (!req.state.next_time_at) {
     req.state.next_time_at = getNextTimeRelease(req)
@@ -40,7 +53,7 @@ const exec = async (req, res) => {
 
   const withPrompt = isPromptMode(response)
     ? response
-    : response.concat(setPrompt(req, res))
+    : response.concat(setPrompt(req))
 
   const commands = []
     .concat(trainingCommands)

@@ -1,15 +1,22 @@
-const chalk = require('chalk')
+// @ts-check
+const { default: chalk } = require('chalk')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { tables } = require('../../../stores/fs')
 
 const name = 'coind'
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [command] = getArgs(req.body.line)
   return command === 'status'
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const server = tables.servers.find({
     address: { $eq: req.session.env.HOST }

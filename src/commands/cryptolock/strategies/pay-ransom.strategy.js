@@ -1,5 +1,6 @@
+// @ts-check
 const ansi = require('ansi-escapes')
-const chalk = require('chalk')
+const { default: chalk } = require('chalk')
 const config = require('config')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
@@ -13,12 +14,18 @@ const bounty = config.get('packages.cryptolock.bounty')
 
 const willPayRansom = ({ type }) => type === '2'
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [server] = tables.servers.find({ address: req.session.env.HOST })
 
   return willPayRansom(server)
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { session, state } = req
   const { env } = session

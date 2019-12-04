@@ -1,3 +1,4 @@
+// @ts-check
 const { getArgs } = require('../../../lib/command')
 const actions = require('../../../actions')
 const { tables } = require('../../../stores/fs')
@@ -5,8 +6,14 @@ const tutorial = require('../../../tutorial')
 const { createHash } = require('../../../lib/password')
 const logger = require('../../../logger')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => req.body.password1 === req.body.state.password2
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const [username] = getArgs(req.body.line).map(arg => arg.toLowerCase())
   const hash = createHash(req.body.password2)

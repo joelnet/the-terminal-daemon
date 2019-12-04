@@ -1,5 +1,6 @@
+//@ts-check
 // TODO: use strategy pattern, like wallet
-const chalk = require('chalk')
+const { default: chalk } = require('chalk')
 const config = require('config')
 const { allPass } = require('mojiscript')
 const { isCommand, getArgs } = require('../lib/command')
@@ -33,7 +34,7 @@ const humanizeLesson = ([name, value]) => {
   ${chalkTemplate(value.body.replace(/\n/g, '\n  '))}
 
   {bold Estimated time completion:}
-    ${getHumanizedDuration(futureDate, Date.now())}${'\n  '}
+    ${getHumanizedDuration(futureDate.getTime(), Date.now())}${'\n  '}
 
   ${chalkTemplate(value.reward.replace(/\n/g, '\n  '))}`
 }
@@ -78,8 +79,14 @@ type {cyan.bold pkg install ${pkg}} to install.`)
   ]
 }
 
+/**
+ * @type { import('../types/strategy').StrategyTest }
+ */
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const [arg] = getArgs(req.body.line)
 

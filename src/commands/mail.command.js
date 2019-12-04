@@ -1,17 +1,26 @@
-const chalk = require('chalk')
+//@ts-check
+const { default: chalk } = require('chalk')
 const config = require('config')
 const { isCommand } = require('../lib/command')
 const { getMail, setRead } = require('../mail')
 const actions = require('../actions')
 
+/**
+ * @type { import('../types/strategy').StrategyTest }
+ */
 const test = isCommand('mail')
 
 const chalkTemplate = template => {
   const chalked = [template]
+  // @ts-ignore
   chalked.raw = chalked
+  // @ts-ignore
   return chalk(chalked)
 }
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { username } = req.session
 
@@ -25,7 +34,7 @@ const exec = req => {
 
   return mails.reduce((acc, mail) => {
     // TODO: this code is shit. un-shit it.
-    const options = config.mail[mail.template]
+    const options = config.get('mail')[mail.template]
     const { tasks = [], text = options } = options
     let template = chalkTemplate(text)
 

@@ -1,3 +1,4 @@
+//@ts-check
 // TODO: use strategy pattern, like wallet
 const ansi = require('ansi-escapes')
 const { allPass } = require('mojiscript')
@@ -11,8 +12,14 @@ const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
 const name = 'xssh'
 const UP = ansi.cursorPrevLine
 
+/**
+ * @type { import('../types/strategy').StrategyTest }
+ */
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const [address] = getArgs(req.body.line)
 

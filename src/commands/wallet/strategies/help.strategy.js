@@ -1,13 +1,21 @@
-const chalk = require('chalk')
+// @ts-check
+const { default: chalk } = require('chalk')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 
 const name = 'wallet'
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [command] = getArgs(req.body.line)
   return command == null || command === '--help'
 }
+
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = () => [
   actions.echo(chalk`Usage: ${name} command
 

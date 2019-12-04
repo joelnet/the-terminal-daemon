@@ -24,7 +24,7 @@ const findStrategy = async (strategies, req) => {
 /**
  * Executes matching Strategy
  * @param {Array} strategies Strategies to find and exec
- * @returns {function({ req: any, res: any }): Promise<Array>}
+ * @returns {function(req, res): Promise<Array>}
  */
 const execStrategy = strategies => async (req, res) => {
   const strategy = await findStrategy(strategies, req)

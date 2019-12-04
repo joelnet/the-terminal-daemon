@@ -1,3 +1,4 @@
+// @ts-check
 const ansi = require('ansi-escapes')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
@@ -7,8 +8,14 @@ const { animateProgressBar } = require('../../../lib/progressbar')
 const UP = ansi.cursorPrevLine
 const delay = 150
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = () => true
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { session } = req
   const { env } = session

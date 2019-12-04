@@ -1,3 +1,4 @@
+// @ts-check
 const config = require('config')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
@@ -7,10 +8,16 @@ const { getHumanizedDuration } = require('../../../lib/time')
 const isUserLucky = servers =>
   servers.length < 2 || Math.random() <= config.get('luck.nscan')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   return req.state.nscan_end_at == null
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { username } = req.session
   const [arg] = getArgs(req.body.line)

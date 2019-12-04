@@ -1,4 +1,5 @@
-const chalk = require('chalk')
+// @ts-check
+const { default: chalk } = require('chalk')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { trainingSelector } = require('../../../stores/selectors')
@@ -8,16 +9,22 @@ const types = {
   pc: 'scan-03'
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [arg] = getArgs(req.body.line)
   const { state } = req
 
   return (
-    (arg === 'iot' && !trainingSelector(state).includes(types[arg])) ||
-    (arg === 'pc' && !trainingSelector(state).includes(types[arg]))
+    ((arg === 'iot' && !trainingSelector(state).includes(types[arg])) ||
+    (arg === 'pc' && !trainingSelector(state).includes(types[arg])))
   )
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const [type] = getArgs(req.body.line)
   return [

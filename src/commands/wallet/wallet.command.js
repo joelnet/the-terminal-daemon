@@ -1,3 +1,4 @@
+//@ts-check
 const { allPass } = require('mojiscript')
 const path = require('path')
 const { isCommand } = require('../../lib/command')
@@ -8,7 +9,15 @@ const name = 'wallet'
 
 const strategyPath = path.join(__dirname, '**/*.strategy.js')
 const strategies = getStrategies(strategyPath)
+
+/**
+ * @type { import('../../types/strategy').StrategyTest }
+ */
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
+
+/**
+ * @type { import('../../types/strategy').StrategyExec }
+ */
 const exec = execStrategy(strategies)
 
 module.exports = {

@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('path')
 
 const trimTrailingSlash = path =>
@@ -7,8 +8,10 @@ const trimTrailingSlash = path =>
 
 /**
  * Joins paths of pwd and dir
- * @param {string} pwd Current working directory
- * @param {string} dir Requested directory (relative or absolute)
+ * @param {object} options
+ * @param {string} options.username Username
+ * @param {string} options.pwd Current working directory
+ * @param {string} options.dir Requested directory (relative or absolute)
  * @returns {string} Absolute path
  */
 const getDir = ({ username, pwd, dir = '' }) =>

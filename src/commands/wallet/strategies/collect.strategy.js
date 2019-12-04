@@ -1,4 +1,5 @@
-const chalk = require('chalk')
+// @ts-check
+const { default: chalk } = require('chalk')
 const config = require('config')
 const { allPass } = require('mojiscript')
 const moment = require('moment')
@@ -35,6 +36,9 @@ const getHumanizedDuration = time => {
   return humanized
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => getArgs(req.body.line)[0] === 'collect'
 
 const cannotCollect = state => [
@@ -53,9 +57,16 @@ const doCollect = (req, state) => {
   state.coins = add(state.coins, collectedAmount)
   tables.state.update(state)
 
-  return [actions.echo(chalk`Collected {cyan.bold ${collectedAmount}} coin`)]
+  return [
+    actions.echo(
+      chalk`Collected {cyan.bold ${collectedAmount.toString()}} coin`
+    )
+  ]
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { state } = req
   logger.debug(`\`wallet collect\` executed by \`${req.session.username}\``)

@@ -1,10 +1,17 @@
+//@ts-check
 const { isCommand, getArgs } = require('../lib/command')
 const { ls } = require('../filesystem')
 const actions = require('../actions')
 const { getDir } = require('../filesystem/getDir')
 
+/**
+ * @type { import('../types/strategy').StrategyTest }
+ */
 const test = isCommand('ls')
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const {
     username,

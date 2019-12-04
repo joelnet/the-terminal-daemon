@@ -1,8 +1,12 @@
+// @ts-check
 const { getArgs } = require('../../../lib/command')
 const { sessions } = require('../../../stores/memory')
 const { getDir } = require('../../../filesystem/getDir')
 const { dirExists } = require('../../../filesystem')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const { username } = req.session
 
@@ -15,6 +19,9 @@ const test = req => {
   })
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const fullPath = getFullPath(req)
 

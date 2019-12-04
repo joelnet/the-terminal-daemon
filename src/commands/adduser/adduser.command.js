@@ -1,3 +1,4 @@
+//@ts-check
 const { isCommand } = require('../../lib/command')
 const { execStrategy } = require('../../lib/strategies')
 const invalidUserStrategy = require('./strategies/invalid-user.strategy') // 1
@@ -11,8 +12,14 @@ const createUserStrategy = require('./strategies/create-user.strategy') // 1000
 
 const name = 'adduser'
 
+/**
+ * @type { import('../../types/strategy').StrategyTest }
+ */
 const test = isCommand(name)
 
+/**
+ * @type { import('../../types/strategy').StrategyExec }
+ */
 const exec = execStrategy([
   invalidUserStrategy,
   noUsernameStrategy,

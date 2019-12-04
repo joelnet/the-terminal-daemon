@@ -1,5 +1,6 @@
+//@ts-check
 // TODO: use strategy pattern, like wallet
-const chalk = require('chalk')
+const { default: chalk } = require('chalk')
 const config = require('config')
 const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
@@ -8,10 +9,16 @@ const { tables } = require('../stores/fs')
 const { dirExists } = require('../filesystem')
 const { fileExists } = require('../filesystem')
 
+/**
+ * @type { import('../types/strategy').StrategyTest }
+ */
 const test = isCommand('cat')
 
 const allServerTypes = config.get('serverTypes')
 
+/**
+ * @type { import('../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const {
     username,

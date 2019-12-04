@@ -1,13 +1,20 @@
-const chalk = require('chalk')
+// @ts-check
+const { default: chalk } = require('chalk')
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { tables } = require('../../../stores/fs')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [command] = getArgs(req.body.line)
   return command === 'miners'
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const servers = tables.servers
     .find({ owner: { $eq: req.session.username } })

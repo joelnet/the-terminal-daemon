@@ -1,7 +1,14 @@
+// @ts-check
 const actions = require('../../../actions')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => req.body.password1 && !req.body.password2
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => [
   actions.prompt({
     prompt: 'Retype new password: ',

@@ -1,13 +1,20 @@
+// @ts-check
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { addSpan } = require('../../../features/time')
 const { tables } = require('../../../stores/fs')
 
+/**
+ * @type { import('../../../types/strategy').StrategyTest }
+ */
 const test = req => {
   const [arg] = getArgs(req.body.line)
   return arg != null && Number(arg) >= 0
 }
 
+/**
+ * @type { import('../../../types/strategy').StrategyExec }
+ */
 const exec = req => {
   const { state } = req
   const [arg] = getArgs(req.body.line)
