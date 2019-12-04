@@ -19,7 +19,7 @@ const controller = (req, res, next) => {
 router.use(controller)
 
 module.exports = {
-  order: 200, // run after session
+  order: 100, // run after session
   router,
   controller
 }
