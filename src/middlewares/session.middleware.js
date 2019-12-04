@@ -13,8 +13,10 @@ router.use((req, res, next) => {
   if (isPost(req) && !hasSessionId(req)) {
     const message = config.get('copy.invalid-session')
     res.json([actions.echo(chalk.red(message)), actions.exit()])
-    next(message)
-  } else if (hasSessionId(req)) {
+    return next(message)
+  }
+
+  if (hasSessionId(req)) {
     req.session = sessions.find({ id: { $eq: req.body.id } })[0]
   }
 
@@ -22,6 +24,6 @@ router.use((req, res, next) => {
 })
 
 module.exports = {
-  order: 100,
+  order: 10,
   router
 }
