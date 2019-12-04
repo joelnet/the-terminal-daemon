@@ -14,7 +14,7 @@ router.use((req, res, next) => {
     const message = config.get('copy.invalid-session')
     res.json([actions.echo(chalk.red(message)), actions.exit()])
     next(message)
-  }else if (hasSessionId(req)) {
+  } else if (hasSessionId(req)) {
     req.session = sessions.find({ id: { $eq: req.body.id } })[0]
   }
 
