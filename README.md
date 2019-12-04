@@ -19,7 +19,8 @@ Start playing the game here: [the-terminal-cli](https://www.npmjs.com/package/th
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="http://joel.net"><img src="https://avatars3.githubusercontent.com/u/742630?v=4" width="100px;" alt="joelnet"/><br /><sub><b>joelnet</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=joelnet" title="Code">💻</a></td>
@@ -33,9 +34,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/Krayorn"><img src="https://avatars2.githubusercontent.com/u/25324366?v=4" width="100px;" alt="Nathael Arki"/><br /><sub><b>Nathael Arki</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=Krayorn" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/p85"><img src="https://avatars0.githubusercontent.com/u/10893666?v=4" width="100px;" alt="p85"/><br /><sub><b>p85</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=p85" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://cagomezr.wordpress.com"><img src="https://avatars0.githubusercontent.com/u/28719157?v=4" width="100px;" alt="cagomezr"/><br /><sub><b>cagomezr</b></sub></a><br /><a href="https://github.com/joelnet/the-terminal-daemon/commits?author=cagomezr" title="Code">💻</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
