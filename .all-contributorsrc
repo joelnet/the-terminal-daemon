@@ -85,11 +85,21 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "cagomezr",
+      "name": "cagomezr",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/28719157?v=4",
+      "profile": "http://cagomezr.wordpress.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "the-terminal-daemon",
   "projectOwner": "joelnet",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
