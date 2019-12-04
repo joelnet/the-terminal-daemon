@@ -15,6 +15,7 @@ const {
   meetsRequirement,
   getAvailableTraining
 } = require('../features/training')
+const { calculateMinutesPerDay } = require('../features/time')
 
 const name = 'train'
 
@@ -46,14 +47,22 @@ const completeTraining = req => {
   const lesson = req.state.training_currently.lesson
   const rewards = config.get('training')[lesson].rewards || []
 
+  req.state.time = rewards
+    .filter(reward => reward.startsWith('minutes:'))
+    .map(x => Number(x.substr(8)))
+    .reduce((acc, x) => acc + x, req.state.time || 0)
+
   req.state.training = req.state.training || []
   req.state.training.push(req.state.training_currently.lesson)
   delete req.state.training_currently
+
+  if (rewards.some(reward => reward.startsWith('minutes:'))) {
+    req.state.time = calculateMinutesPerDay(req)
+  }
+
   tables.state.update(req.state)
 
-  // TODO: figure out better solution for tutorial
-  tutorial.step4(req.session.username, lesson)
-  tutorial.step7(req.session.username, lesson)
+  tutorial.train(req.session.username, lesson)
 
   return [
     actions.echo(

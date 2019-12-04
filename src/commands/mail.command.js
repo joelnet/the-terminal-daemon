@@ -31,17 +31,19 @@ const exec = req => {
 
     if (tasks.length) {
       template += chalk`\n{bgGreen.black  Hints: }`
-      template += tasks.map(task => {
-        if (task.train != null) {
-          return chalk`
-  - type {cyan.bold train} to access the training system
-  - type {cyan.bold train ${task.train}} to train`
-        }
-        if (task.run != null) {
-          return chalk`
-  - type {cyan.bold ${task.run}} to run the package`
-        }
-      })
+      template += tasks.some(({ train }) => train)
+        ? chalk`\n  - type {cyan.bold train} to access the training system`
+        : ''
+      template += tasks
+        .map(task => {
+          if (task.train != null) {
+            return chalk`\n  - type {cyan.bold train ${task.train}} to train`
+          }
+          if (task.run != null) {
+            return chalk`\n  - type {cyan.bold ${task.run}} to run the package`
+          }
+        })
+        .join('')
     }
 
     return [

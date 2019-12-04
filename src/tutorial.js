@@ -43,9 +43,10 @@ const step3 = username => {
  * @param {string} username
  * @param {string} lesson
  */
-const step4 = (username, lesson) => {
-  if (lesson !== 'crypto-01') return
-  nextMail(username, 'exploitable', 'xssh')
+const train = (username, lesson) => {
+  if (lesson === 'crypto-01') return nextMail(username, 'exploitable', 'xssh')
+  if (lesson === 'time-03') return nextMail(username, 'time', 'cryptolock')
+  if (lesson === 'crypto-02') return nextMail(username, 'cryptolock', 'ransom')
 }
 
 /**
@@ -61,24 +62,14 @@ const step5 = username => {
  */
 const step6 = (username, coins) => {
   if (Number(coins) > 0 === false) return
-  nextMail(username, 'wallet', 'cryptolock')
-}
-
-/**
- * @param {string} username
- * @param {string} lesson
- */
-const step7 = (username, lesson) => {
-  if (lesson !== 'crypto-02') return
-  nextMail(username, 'cryptolock', 'ransom')
+  nextMail(username, 'wallet', 'time')
 }
 
 module.exports = {
+  train,
   step1,
   step2,
   step3,
-  step4,
   step5,
-  step6,
-  step7
+  step6
 }

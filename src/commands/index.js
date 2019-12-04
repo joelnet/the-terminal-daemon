@@ -3,6 +3,12 @@ const { setPrompt } = require('../prompt')
 const { getStrategies, execStrategy } = require('../lib/strategies')
 const { isScanRunning, completeTraining } = require('./train.command')
 const nscan = require('./nscan/discover-server')
+const {
+  getNextTimeRelease,
+  shouldCollectTime,
+  collectTime
+} = require('../features/time')
+const { tables } = require('../stores/fs')
 
 const strategies = getStrategies(path.join(__dirname, '**/*.command.js'))
 
@@ -13,6 +19,16 @@ const isPromptMode = response => response.some(({ type }) => type === 'PROMPT')
 
 const exec = async (req, res) => {
   const response = await execStrategy(strategies)(req, res)
+
+  if (!req.state.next_time_at) {
+    req.state.next_time_at = getNextTimeRelease(req)
+  }
+
+  if (shouldCollectTime(req)) {
+    collectTime(req)
+  }
+
+  tables.state.update(req.state)
 
   const trainingCommands =
     req.state.training_currently != null && !isScanRunning(req.state)
