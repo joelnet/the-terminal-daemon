@@ -278,6 +278,20 @@ mail:
         $ {cyan.bold wallet balance}
 
       - X
+  time:
+    text: |
+      Time is an illusion. Always remember this.
+
+      Let me show you how you can use {cyan.bold time} to your advantage.
+
+      Train {cyan.bold time-01} and use that skill to quickly train up to {cyan.bold time-03}.
+
+    tasks:
+      - { train: time-01 }
+      - { train: time-02 }
+      - { run: time 5 }
+      - { train: time-03 }
+      - { run: time 60 }
   cryptolock:
     text: |
       Running crypto miners is just one of many way to make money in this world.

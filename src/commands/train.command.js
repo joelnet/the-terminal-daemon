@@ -56,9 +56,7 @@ const completeTraining = req => {
   delete req.state.training_currently
   tables.state.update(req.state)
 
-  // TODO: figure out better solution for tutorial
-  tutorial.step4(req.session.username, lesson)
-  tutorial.step7(req.session.username, lesson)
+  tutorial.train(req.session.username, lesson)
 
   return [
     actions.echo(
