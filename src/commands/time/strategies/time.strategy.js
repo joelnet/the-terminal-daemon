@@ -1,6 +1,7 @@
 const actions = require('../../../actions')
 const { getArgs } = require('../../../lib/command')
 const { addSpan } = require('../../../features/time')
+const { tables } = require('../../../stores/fs')
 
 const test = req => {
   const [arg] = getArgs(req.body.line)
@@ -34,6 +35,8 @@ const exec = req => {
   }
 
   state.time -= minutes
+
+  tables.state.update(state)
 
   return [actions.echo(`You have moved forward in time by ${minutes} minutes`)]
 }

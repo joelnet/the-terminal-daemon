@@ -56,13 +56,9 @@ const completeTraining = req => {
   req.state.training.push(req.state.training_currently.lesson)
   delete req.state.training_currently
 
-  req.state.time = Math.min(
-    calculateMinutesPerDay(req),
-    rewards
-      .filter(reward => reward.startsWith('minutes:'))
-      .map(x => Number(x.substr(8)))
-      .reduce((acc, x) => acc + x, req.state.time || 0)
-  )
+  if (rewards.some(reward => reward.startsWith('minutes:'))) {
+    req.state.time = calculateMinutesPerDay(req)
+  }
 
   tables.state.update(req.state)
 
