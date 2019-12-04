@@ -42,8 +42,11 @@ const getAvailableTraining = ({
     })
 }
 
+const getTraining = state => state.training || []
+
 module.exports = {
   getAllTraining,
   meetsRequirement,
-  getAvailableTraining
+  getAvailableTraining,
+  getTraining
 }
