@@ -5,8 +5,8 @@ const { isCommand, getArgs } = require('../lib/command')
 const actions = require('../actions')
 const { getDir } = require('../filesystem/getDir')
 const { tables } = require('../stores/fs')
-const { dirExists } = require('../filesystem')
-const { fileExists } = require('../filesystem')
+// const { dirExists } = require('../filesystem')
+// const { fileExists } = require('../filesystem')
 
 const test = isCommand('cat')
 
@@ -21,13 +21,13 @@ const exec = req => {
   const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
 
-  if (dirExists({ dir: path, username, session: req.session })) {
-    return [actions.echo(`cat: ${arg}: Is directory`)]
-  }
+  // if (dirExists({ dir: path, username, session: req.session })) {
+  //   return [actions.echo(`cat: ${arg}: Is directory`)]
+  // }
 
-  if (!fileExists({ dir: path, username, session: req.session })) {
-    return [actions.echo(`cat: ${arg}: No such file or directory`)]
-  }
+  // if (!fileExists({ dir: path, username, session: req.session })) {
+  //   return [actions.echo(`cat: ${arg}: No such file or directory`)]
+  // }
 
   if (path === `/home/${username}/servers`) {
     const servers = tables.servers.find({
