@@ -1,9 +1,9 @@
 //@ts-check
 const { allPass } = require('mojiscript')
+const path = require('path')
 const { isCommand } = require('../../lib/command')
 const { doesServerHavePackage } = require('../lib/doesServerHavePackage')
 const { execStrategy, getStrategies } = require('../../lib/strategies')
-const path = require('path')
 
 const name = 'nscan'
 
