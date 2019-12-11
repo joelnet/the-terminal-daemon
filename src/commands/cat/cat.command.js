@@ -2,22 +2,22 @@
 // TODO: use strategy pattern, like wallet
 const { default: chalk } = require('chalk')
 const config = require('config')
-const { isCommand, getArgs } = require('../lib/command')
-const actions = require('../actions')
-const { getDir } = require('../filesystem/getDir')
-const { tables } = require('../stores/fs')
-const { dirExists } = require('../filesystem')
-const { fileExists } = require('../filesystem')
+const { isCommand, getArgs } = require('../../lib/command')
+const actions = require('../../actions')
+const { getDir } = require('../../filesystem/getDir')
+const { tables } = require('../../stores/fs')
+const { dirExists } = require('../../filesystem')
+const { fileExists } = require('../../filesystem')
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = isCommand('cat')
 
 const allServerTypes = config.get('serverTypes')
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const {

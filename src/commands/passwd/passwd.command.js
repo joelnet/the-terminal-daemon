@@ -1,18 +1,18 @@
 //@ts-check
-const { isCommand } = require('../lib/command')
-const { createHash } = require('../lib/password')
-const actions = require('../actions')
-const { tables } = require('../stores/fs')
+const { isCommand } = require('../../lib/command')
+const { createHash } = require('../../lib/password')
+const actions = require('../../actions')
+const { tables } = require('../../stores/fs')
 
 const name = 'passwd'
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = isCommand(name)
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const username = req.session.env.user

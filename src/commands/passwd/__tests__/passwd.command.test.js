@@ -1,6 +1,6 @@
 const { exec } = require('../passwd.command')
-const { onLoad, tables } = require('../../stores/fs')
-const { ls } = require('../../filesystem/ls')
+const { onLoad, tables } = require('../../../stores/fs')
+const { ls } = require('../../../filesystem/ls')
 
 describe('commands/passwd', () => {
   const session = {

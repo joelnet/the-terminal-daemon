@@ -4,7 +4,7 @@ const { default: chalk } = require('chalk')
 const config = require('config')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
-const { setSessionToHomeServer } = require('../../exit.command')
+const { setSessionToHomeServer } = require('../../exit/exit.command')
 const { add } = require('../../../lib/coinmath')
 const { animateProgressBar } = require('../../../lib/progressbar')
 

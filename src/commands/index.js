@@ -4,7 +4,7 @@ const path = require('path')
 const actions = require('../actions')
 const { setPrompt } = require('../prompt')
 const { getStrategies, execStrategy } = require('../lib/strategies')
-const { isScanRunning, completeTraining } = require('./train.command')
+const { isScanRunning, completeTraining } = require('./train/train.command')
 const nscan = require('./nscan/discover-server')
 const {
   getNextTimeRelease,
@@ -41,7 +41,9 @@ const exec = async (req, res) => {
     collectTime(req)
   }
 
-  tables.state.update(req.state)
+  if (req.state.$loki) {
+    tables.state.update(req.state)
+  }
 
   const trainingCommands =
     req.state.training_currently != null && !isScanRunning(req.state)

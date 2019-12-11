@@ -3,20 +3,20 @@
 const { default: chalk } = require('chalk')
 const config = require('config')
 const { allPass } = require('mojiscript')
-const { isCommand, getArgs } = require('../lib/command')
-const actions = require('../actions')
-const { tables } = require('../stores/fs')
-const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
-const { getHumanizedDuration } = require('../lib/time')
-const { chalkTemplate } = require('../lib/strings')
-const logger = require('../logger')
-const tutorial = require('../tutorial')
+const { isCommand, getArgs } = require('../../lib/command')
+const actions = require('../../actions')
+const { tables } = require('../../stores/fs')
+const { doesServerHavePackage } = require('../lib/doesServerHavePackage')
+const { getHumanizedDuration } = require('../../lib/time')
+const { chalkTemplate } = require('../../lib/strings')
+const logger = require('../../logger')
+const tutorial = require('../../tutorial')
 const {
   getAllTraining,
   meetsRequirement,
   getAvailableTraining
-} = require('../features/training')
-const { calculateMinutesPerDay } = require('../features/time')
+} = require('../../features/training')
+const { calculateMinutesPerDay } = require('../../features/time')
 
 const name = 'train'
 
@@ -80,12 +80,12 @@ type {cyan.bold pkg install ${pkg}} to install.`)
 }
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const [arg] = getArgs(req.body.line)

@@ -1,5 +1,5 @@
 const { exec } = require('../cat.command')
-const { onLoad } = require('../../stores/fs')
+const { onLoad } = require('../../../stores/fs')
 
 describe('commands/cat', () => {
   const session = {

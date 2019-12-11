@@ -1,16 +1,16 @@
 //@ts-check
-const { isCommand, getArgs } = require('../lib/command')
-const { ls } = require('../filesystem')
-const actions = require('../actions')
-const { getDir } = require('../filesystem/getDir')
+const { isCommand, getArgs } = require('../../lib/command')
+const { ls } = require('../../filesystem')
+const actions = require('../../actions')
+const { getDir } = require('../../filesystem/getDir')
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = isCommand('ls')
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const {
@@ -18,7 +18,7 @@ const exec = req => {
     env: { PWD }
   } = req.session
 
-  const arg = getArgs(req.body.line)[0]
+  const [arg] = getArgs(req.body.line)
   const dir = getDir({ username, pwd: PWD, dir: arg })
 
   return ls({ path: dir, username, session: req.session }).getValue(

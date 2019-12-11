@@ -2,7 +2,7 @@
 const ansi = require('ansi-escapes')
 const { tables } = require('../../../stores/fs')
 const actions = require('../../../actions')
-const { setSessionToHomeServer } = require('../../exit.command')
+const { setSessionToHomeServer } = require('../../exit/exit.command')
 const { animateProgressBar } = require('../../../lib/progressbar')
 
 const UP = ansi.cursorPrevLine

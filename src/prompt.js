@@ -5,7 +5,7 @@ const { getMail, isUnread } = require('./mail')
 const { getHumanizedDuration } = require('./lib/time')
 const { tables } = require('./stores/fs')
 const { canCollect } = require('./commands/wallet/strategies/collect.strategy')
-const { getServer } = require('./commands/pkg.command')
+const { getServer } = require('./commands/pkg/pkg.command')
 const { getTime } = require('./features/time')
 
 const getMailPrompt = req => {

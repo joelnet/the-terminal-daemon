@@ -1,5 +1,5 @@
 const { exec } = require('../clear.command')
-const actions = require('../../actions')
+const actions = require('../../../actions')
 
 describe('commands/clear', () => {
   test('execution of the command returns an array', () => {

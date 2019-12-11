@@ -2,23 +2,23 @@
 // TODO: use strategy pattern, like wallet
 const ansi = require('ansi-escapes')
 const { allPass } = require('mojiscript')
-const { getArgs, isCommand } = require('../lib/command')
-const { animateProgressBar } = require('../lib/progressbar')
+const { getArgs, isCommand } = require('../../lib/command')
+const { animateProgressBar } = require('../../lib/progressbar')
 
-const actions = require('../actions')
-const { tables } = require('../stores/fs')
-const { doesServerHavePackage } = require('./lib/doesServerHavePackage')
+const actions = require('../../actions')
+const { tables } = require('../../stores/fs')
+const { doesServerHavePackage } = require('../lib/doesServerHavePackage')
 
 const name = 'xssh'
 const UP = ansi.cursorPrevLine
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = allPass([isCommand(name), doesServerHavePackage(name)])
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const [address] = getArgs(req.body.line)

@@ -91,7 +91,7 @@ const promptPassword = (req, res) => {
   ])
 }
 
-const loginUser = (req, res) => {
+const loginUser = async (req, res) => {
   const session = sessions.find({ id: { $eq: req.body.id } })[0]
   const { username } = session
 
@@ -107,7 +107,7 @@ const loginUser = (req, res) => {
   )
 
   // setup state for user
-  stateController(req, res, () => {})
+  await stateController(req, res, () => {})
 
   const ip = req.header('x-forwarded-for') || req.connection.remoteAddress
   logger.info(`User \`${username}\` logged in from ${ip}`)

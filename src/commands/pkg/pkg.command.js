@@ -2,11 +2,11 @@
 // TODO: use strategy pattern, like wallet
 const { default: chalk } = require('chalk')
 const config = require('config')
-const { isCommand, getArgs } = require('../lib/command')
-const actions = require('../actions')
-const { tables } = require('../stores/fs')
-const tutorial = require('../tutorial')
-const { meetsRequirement } = require('./train.command.js')
+const { isCommand, getArgs } = require('../../lib/command')
+const actions = require('../../actions')
+const { tables } = require('../../stores/fs')
+const tutorial = require('../../tutorial')
+const { meetsRequirement } = require('../train/train.command')
 
 const name = 'pkg'
 
@@ -29,7 +29,7 @@ Setting up ${pkg} ...`
     .map(log => actions.echo(log, { delay: Math.random() * 500 }))
 
 /**
- * @type { import('../types/strategy').StrategyTest }
+ * @type { import('../../types/strategy').StrategyTest }
  */
 const test = isCommand(name)
 
@@ -48,7 +48,7 @@ const getServer = (owner, address) => {
 }
 
 /**
- * @type { import('../types/strategy').StrategyExec }
+ * @type { import('../../types/strategy').StrategyExec }
  */
 const exec = req => {
   const [action, pkg] = getArgs(req.body.line)
