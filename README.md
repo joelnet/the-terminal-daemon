@@ -2,7 +2,7 @@
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
 
-The Terminal is a hacker game played in the terminal.
+The Terminal is a hacking simulator.
 
 ## Help / Feedback
 
