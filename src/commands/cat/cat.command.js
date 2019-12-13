@@ -8,7 +8,7 @@ const name = 'cat'
 
 const strategyPath = path.join(__dirname, '**/*.strategy.js')
 const strategies = getStrategies(strategyPath)
-const test = allPass([isCommand(name), doesServerHavePackage(name)])
+const test = isCommand(name)
 const exec = execStrategy(strategies)
 
 module.exports = {

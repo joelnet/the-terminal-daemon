@@ -13,9 +13,9 @@ describe('commands/cat', () => {
     await new Promise(onLoad)
   })
 
-  test('cat("/bin") should return: is a directory', () => {
+  test('cat("/bin") should return: is a directory', async () => {
     const directory = '/bin'
-    const actual = exec({ session, body: { line: `cat ${directory}` } })[0]
+    const [actual] = await exec({ session, body: { line: `cat ${directory}` } })
     const expected = {
       type: 'ECHO',
       value: `cat: ${directory}: Is directory`
@@ -23,9 +23,9 @@ describe('commands/cat', () => {
     expect(actual).toMatchObject(expected)
   })
 
-  test('cat("/x89341/ff8312") should return: No such file or directory', () => {
+  test('cat("/x89341/ff8312") should return: No such file or directory', async () => {
     const file = '/x89341/ff8312'
-    const actual = exec({ session, body: { line: `cat ${file}` } })[0]
+    const [actual] = await exec({ session, body: { line: `cat ${file}` } })
     const expected = {
       type: 'ECHO',
       value: `cat: ${file}: No such file or directory`
@@ -33,9 +33,9 @@ describe('commands/cat', () => {
     expect(actual).toMatchObject(expected)
   })
 
-  test('cat("/bin/ls") should return: File cannot be output', () => {
+  test('cat("/bin/ls") should return: File cannot be output', async () => {
     const file = '/bin/ls'
-    const actual = exec({ session, body: { line: `cat ${file}` } })[0]
+    const [actual] = await exec({ session, body: { line: `cat ${file}` } })
     const expected = {
       type: 'ECHO',
       value: `cat: ${file}: File cannot be output`
