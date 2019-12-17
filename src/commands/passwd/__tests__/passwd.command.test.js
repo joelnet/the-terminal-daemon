@@ -9,15 +9,6 @@ describe.skip('commands/passwd', () => {
     }
   }
 
-  // TODO: this function dangerously updates the users session.
-  // test('passwd should be within /bin dir', () => {
-  //   const expected = { name: 'passwd', type: 'f' }
-  //   const actual = ls({ path: '/bin', username: 'test', session }).value.find(
-  //     file => file.name === 'passwd'
-  //   )
-  //   expect(actual).toMatchObject(expected)
-  // })
-
   test('passwd, first input should return a Prompt', async () => {
     const [actual] = await exec({ session, body: { line: 'passwd' } })
     const expected = { type: 'PROMPT' }
