@@ -13,6 +13,16 @@ describe('commands/cat', () => {
     await new Promise(onLoad)
   })
 
+  test('cat("/x89341/ff8312") should return: No such file or directory', async () => {
+    const file = '/x89341/ff8312'
+    const [actual] = await exec({ session, body: { line: `cat ${file}` } })
+    const expected = {
+      type: 'ECHO',
+      value: `cat: ${file}: No such file or directory`
+    }
+    expect(actual).toMatchObject(expected)
+  })
+
   test('cat("/bin") should return: is a directory', async () => {
     const directory = '/bin'
     const [actual] = await exec({ session, body: { line: `cat ${directory}` } })
@@ -23,15 +33,6 @@ describe('commands/cat', () => {
     expect(actual).toMatchObject(expected)
   })
 
-  test('cat("/x89341/ff8312") should return: No such file or directory', async () => {
-    const file = '/x89341/ff8312'
-    const [actual] = await exec({ session, body: { line: `cat ${file}` } })
-    const expected = {
-      type: 'ECHO',
-      value: `cat: ${file}: No such file or directory`
-    }
-    expect(actual).toMatchObject(expected)
-  })
 
   test('cat("/bin/ls") should return: File cannot be output', async () => {
     const file = '/bin/ls'

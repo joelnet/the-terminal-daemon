@@ -1,7 +1,7 @@
-const { allPass } = require('mojiscript')
+// const { allPass } = require('mojiscript')
 const { isCommand } = require('../../lib/command')
 const path = require('path')
-const { doesServerHavePackage } = require('../lib/doesServerHavePackage')
+// const { doesServerHavePackage } = require('../lib/doesServerHavePackage')
 const { execStrategy, getStrategies } = require('../../lib/strategies')
 
 const name = 'cat'

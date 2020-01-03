@@ -18,7 +18,7 @@ const exec = req => {
 }
 
 module.exports = {
-  sort: 14,
+  sort: 100,
   test,
   exec
 }

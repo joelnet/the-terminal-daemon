@@ -10,14 +10,14 @@ const test = req => {
   } = req.session
   const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
-  return !fileExists({ dir: path, username, session: req.session })
+  return fileExists({ dir: path, username, session: req.session })
 }
 const exec = req => {
   const [arg] = getArgs(req.body.line)
   return [actions.echo(`cat: ${arg}: No such file or directory`)]
 }
 module.exports = {
-  sort: 13,
+  sort: 10,
   test,
   exec
 }
