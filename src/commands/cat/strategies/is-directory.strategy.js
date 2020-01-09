@@ -10,7 +10,7 @@ const test = req => {
   } = req.session
   const [arg] = getArgs(req.body.line)
   const path = getDir({ username, pwd, dir: arg })
-  return dirExists(dirExists({ dir: path, username, session: req.session }))
+  return dirExists({ dir: path, username, session: req.session })
 }
 const exec = req => {
   const [arg] = getArgs(req.body.line)
@@ -18,7 +18,7 @@ const exec = req => {
 }
 
 module.exports = {
-  sort: 100,
+  sort: 10,
   test,
   exec
 }
