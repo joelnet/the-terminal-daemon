@@ -25,7 +25,7 @@
     "js-yaml": "^3.13.1",
     "lokijs": "^1.5.7",
     "mojiscript": "^0.13.9",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "project-name-generator": "^2.1.7",
     "random-ipv6": "^1.0.2",
     "shell-quote": "^1.7.2",
